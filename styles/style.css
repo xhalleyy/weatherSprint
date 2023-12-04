@@ -1,3 +1,37 @@
+@font-face {
+    font-family: philosopher-reg;
+    src: url(../assets/Philosopher-Regular.ttf);
+}
+
+@font-face {
+    font-family: philosopher-bold;
+    src: url(../assets/Philosopher-Bold.ttf);
+}
+
+/* nav bar */
+.nav-style{
+    background-color: white;
+}
+
+.weatherTitle {
+    color: #707070;
+    font-family: philosopher-bold;
+}
+
+.form-control {
+    width: 320px;
+    height: 45px;
+    box-shadow: 0px 0px 10px 3px #e9e7e7;
+}
+
+.search-icon-btn {
+    background-color: #BDB8F8;
+}
+
+.border-rad {
+    border-radius: 15px;
+}
+
 .BGImg{
     background-image: url(../assets/Gradient_builder_2.png);
     background-repeat: no-repeat;

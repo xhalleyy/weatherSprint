@@ -8,13 +8,23 @@
     <link rel="stylesheet" href="./styles/style.css">
   </head>
   <body class="BGImg">
-    <nav class="navbar bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand">Navbar</a>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search for a City" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+
+    <!-- NavBar and Search field -->
+    <nav class="nav nav-style">
+      <div class="container">
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="col">
+            <a class="nav-link" href="#"><h1 class="weatherTitle py-0">climate.xchange</h1></a>
+          </div>
+          <div class="col d-flex justify-content-end align-items-center">
+            <form class="d-flex" role="search">
+              <input class="form-control border-rad me-3" type="search" placeholder="Search for a City" aria-label="Search">
+              <button class="btn border-rad search-icon-btn" type="submit"><img class="img-fluid" width="28px" height="40px" src="./assets/Search-Button-White-PNG.png" alt=""></button>
+            </form>
+          </div>
+          <div class="col-1"></div>
+        </div>
       </div>
     </nav>
 
@@ -23,18 +33,18 @@
         <div class="col-1"></div>
         <div class="col-5 whiteBG my-5 me-3">
           <div class="row">
-            <div class="col">Location</div>
+            <div id="cityName" class="col">Location</div>
           </div>
           <div class="row">
-            <div class="col-3">Image/Icon</div>
-            <div class="col">Current Temperature</div>
+            <div id="weatherIcon" class="col-3">Image/Icon</div>
+            <div id="currentTemp" class="col">Current Temperature</div>
           </div>
           <div class="row">
-            <div class="col-6">Description</div>
+            <div id="weatherText" class="col-6">Description</div>
             <div class="col-6">
               <div class="row">
-                <div class="col">Max</div>
-                <div class="col">Min</div>
+                <div id="maxTemp" class="col">Max</div>
+                <div id="minTemp" class="col">Min</div>
               </div>
             </div>
           </div>
@@ -66,6 +76,41 @@
       </div>
     </div>
 
+    <div class="container">
+      <div class="row">
+        <div class="col-1"></div>
+
+        <div class="col-2">
+          <h3 id="day1"></h3>
+          <div id="day1icon"></div>
+        </div>
+        <div class="col-2">
+          <h3 id="day2"></h3>
+          <div id="day2icon"></div>
+        </div>
+        <div class="col-2">
+          <h3 id="day3"></h3>
+          <div id="day3icon"></div>
+        </div>
+        <div class="col-2">
+          <h3 id="day4"></h3>
+          <div id="day4icon"></div>
+        </div>
+        <div class="col-2">
+          <h3 id="day5"></h3>
+          <div id="day5icon"></div>
+        </div>
+
+        <div class="col-1"></div>
+      </div>
+    </div>
+
+    <div class="container d-flex justify-content-center">
+      <a class="whiteBG border-rad" href="">
+        <img src="" alt="">
+        <p>Open Your Favorite Places</p>
+      </a>
+    </div>
 
 
     
