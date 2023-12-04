@@ -1,0 +1,9 @@
+.BGImg{
+    background-image: url(../assets/Gradient_builder_2.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.whiteBG{
+    background-color: white;
+}
