@@ -13,3 +13,7 @@ Weather Sprint
 - work on grabbing certain data from API
 - realized that I might need current weather data, so have to fetch that api
 - conversions for temperature and date
+
+12/6 SOD: 
+- try to display weather icons given a certain data
+- work on input field, click search button, then information reloads/changes

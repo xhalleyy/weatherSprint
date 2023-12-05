@@ -14,6 +14,11 @@
 }
 
 @font-face {
+    font-family: roboto-thin;
+    src: url(../assets/Roboto-Thin.ttf);
+}
+
+@font-face {
     font-family: roboto-reg;
     src: url(../assets/Roboto-Regular.ttf);
 }
@@ -62,11 +67,19 @@
 .BGImg{
     background-image: url(../assets/2870257.jpg);
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: 100% 100vh;
 }
 
 .whiteBG{
     background-color: white;
+}
+
+.darkGrayColor{
+    color: #454545;
+}
+
+.lightGrayColor {
+    color: #6D6D6D;
 }
 
 .desc-and-temps{
@@ -75,7 +88,10 @@
 }
 
 .timeText {
+    font-family: roboto-thin;
     font-size: 25px;
+    font-weight: bold;
+    color: #6D6D6D;
 }
 
 .timeTempText {
@@ -100,3 +116,13 @@
     z-index: -1;
     overflow: hidden;
 }
+
+/* .sunImage {
+    background-image: url(../assets/Yellow-Circle-PNG-Free-Image.png);
+    background-repeat: no-repeat;
+    height: 600px;
+    width: 600px;
+    position: absolute;
+    background-position: 50% 100%;
+    z-index: -1;
+} */

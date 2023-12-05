@@ -41,6 +41,10 @@ let day3Min = "";
 let day4Min = "";
 let day5Min = "";
 
+let userInput = document.getElementById("userInput");
+let searchBtn = document.getElementById("searchBtn");
+let searchedData;
+
 navigator.geolocation.getCurrentPosition(success, errorFunc);
 
 // Success leads to initial load of page where data of the location is displayed
@@ -101,16 +105,60 @@ async function CurrentApi(currLatitude, currLongitude){
     return data;
 }
 
-async function SearchCityApi(cityName) {
+async function SearchCityApi(city, state, countryCode) {
     const promise = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}`
+        `http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${countryCode}&limit=1&appid=${apiKkey}
+        `
     );
     const data = await promise.json();
-    console.log(data);
+    searchedData = data[0].name.toLowerCase();
 }
+
+// const citySearchData = await SearchCityApi(city, state, countryCode);
+// console.log(citySearchData);
 
 // Built in geo-code is deprecated so have to change to geocoding api when there
 // Geocoding API
 // api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
 
-// 
+function findCity (){
+    // reassigning the input to another variable so that the value is saved
+    let cityInput = userInput.value.toLowerCase();
+
+    if(cityInput === searchedData){
+        console.log(searchedData);
+    }
+
+}
+
+searchBtn.addEventListener('click', function(e){
+    findCity();
+});
+
+// function findStudent(){
+//     // reassign the value of userInput to studentInput so that the input is saved
+//     let studentInput = userInput.value.toLowerCase();
+
+//     for(let i = 0; i < students.length; i++){
+
+//         // every time we loop/iterate, we save their student here
+//         let currentStudent = students[i]
+//         if(studentInput === currentStudent.firstName.toLowerCase()){
+
+//             matchingStudent = currentStudent;
+//         }
+//     }
+
+//     if(matchingStudent){
+//         // inner text doesn't include any white space if you console
+//         studentName.innerText = `${matchingStudent.firstName} ${matchingStudent.lastName}`;
+//         studentNumber.innerText = matchingStudent.phoneNumber;
+//         studentEmail.innerText = matchingStudent.email;
+//     }else{
+//         studentName.innerText = "Student not Found";
+//     }
+// }
+
+// submitBtn.addEventListener('click', function(e){
+//     findStudent();
+//    });
