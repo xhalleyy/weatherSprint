@@ -1,13 +1,7 @@
-function currentTempConvert (weatherData){
-    let currentFahrenheit = (weatherData - 273.15)* (9/5) + 32;
-}
+const now = new Date();
+const hours = now.getHours();
+const minutes = now.getMinutes();
 
-function MaxTempConvert (number){
-    let maxFahrenheit = (maxTemp - 273.15)* (9/5) + 32;
-}
+export {now, hours, minutes}
 
-function MinTempConvert (number){
-    let minFahrenheit = (minTemp - 273.15)* (9/5) + 32;
-}
-
-export {currentTempConvert, MaxTempConvert, MinTempConvert}
+// Need to change to 12 hour format 

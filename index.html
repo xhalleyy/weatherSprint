@@ -31,44 +31,47 @@
     <div class="container">
       <div class="row">
         <div class="col-1"></div>
-        <div class="col-5 whiteBG my-5 me-3">
+        <div class="col-5 whiteBG border-rad my-5 me-3 px-4">
           <div class="row">
-            <div id="cityName" class="col">Location</div>
+            <div id="cityName" class="col placeLocation pt-4">LOCATION</div>
           </div>
           <div class="row">
-            <div id="weatherIcon" class="col-3">Image/Icon</div>
-            <div id="currentTemp" class="col">Current Temperature</div>
+            <div id="weatherIcon" class="col-3 d-flex justify-content-center">Image/Icon</div>
+            <div id="currentTemp" class="curr-temp-text col d-flex justify-content-end pe-4">Temp.</div>
           </div>
-          <div class="row">
-            <div id="weatherText" class="col-6">Description</div>
+          <!-- <div class="horizontal-dotted-line"></div>></div> -->
+          <div class="row pb-4 desc-and-temps">
+            <hr>
+            <div id="weatherText" class="col-6 px-4 d-flex align-items-center">Description</div>
             <div class="col-6">
               <div class="row">
-                <div id="maxTemp" class="col">Max</div>
-                <div id="minTemp" class="col">Min</div>
+                <div id="maxTemp" class="col d-flex align-items-center pe-0">Max</div>
+                <div id="minTemp" class="col d-flex align-items-center ps-0">Min</div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-5 whiteBG my-5 ms-3">
+        <!-- Current's Date and 3 Hr Forecast -->
+        <div class="col-5 border-rad whiteBG my-5 ms-2 pt-4 px-4">
           <div class="row">
-            <div class="col">Today</div>
-            <div class="col">Current Time</div>
+            <div class="col todayText">Today</div>
+            <div id="presentTime" class="col d-flex justify-content-end pe-3">Current Time</div>
           </div>
-          <div class="row">
-            <div class="col">
-              <p>Time</p>
+          <div class="row mt-3">
+            <div class="col-4 text-center">
+              <p class="timeText">8AM</p>
               <img src="" alt="">
-              <h2>Temp</h2>
+              <h2 id="todayAMTemp" class="timeTempText">Temp</h2>
             </div>
-            <div class="col">
-              <p>Time</p>
+            <div class="col-4 text-center">
+              <p class="timeText">noon</p>
               <img src="" alt="">
-              <h2>Temp</h2>
+              <h2 id="todayNoonTemp" class="timeTempText">Temp</h2>
             </div>
-            <div class="col">
-              <p>Time</p>
+            <div class="col-4 text-center">
+              <p class="timeText">8PM</p>
               <img src="" alt="">
-              <h2>Temp</h2>
+              <h2 id="todayPMTemp" class="timeTempText">Temp</h2>
             </div>
           </div>
         </div>
@@ -76,42 +79,49 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container fiveDayWeather mb-5" style="opacity: .7;">
       <div class="row">
         <div class="col-1"></div>
 
-        <div class="col-2">
-          <h3 id="day1"></h3>
+        <div class="col-2 whiteBG border-rad d-flex justify-content-center me-2">
+          <h3 id="day1" class="pt-3">Day</h3>
           <div id="day1icon"></div>
+          <div id="day1MaxandMin"></div>
         </div>
-        <div class="col-2">
-          <h3 id="day2"></h3>
+        <div class="col-2 whiteBG border-rad d-flex justify-content-center me-2">
+          <h3 id="day2" class="pt-3"> Day</h3>
           <div id="day2icon"></div>
+          <div id="day2MaxandMin"></div>
         </div>
-        <div class="col-2">
-          <h3 id="day3"></h3>
+        <div class="col-2 whiteBG border-rad d-flex justify-content-center me-2">
+          <h3 id="day3" class="pt-3">Day</h3>
           <div id="day3icon"></div>
+          <div id="day3MaxandMin"></div>
         </div>
-        <div class="col-2">
-          <h3 id="day4"></h3>
+        <div class="col-2 whiteBG border-rad d-flex justify-content-center me-2">
+          <h3 id="day4" class="pt-3"> Day</h3>
           <div id="day4icon"></div>
+          <div id="day4MaxandMin"></div>
         </div>
-        <div class="col-2">
-          <h3 id="day5"></h3>
+        <div class="col-2 whiteBG border-rad d-flex justify-content-center ">
+          <h3 id="day5" class="pt-3">Day</h3>
           <div id="day5icon"></div>
+          <div id="day5MaxandMin"></div>
         </div>
 
         <div class="col-1"></div>
       </div>
     </div>
 
-    <div class="container d-flex justify-content-center">
-      <a class="whiteBG border-rad" href="">
-        <img src="" alt="">
-        <p>Open Your Favorite Places</p>
+    <div class="container d-flex justify-content-center align-items-center">
+      <a id="openFavorites" class="whiteBG py-3" style="border-radius: 25px;" href="">
+        <p class="my-0">Open Your Favorite Places</p>
       </a>
     </div>
 
+    <div>
+      <img class="sun-btn" src="./assets/Yellow-Circle-PNG-Free-Image.png" alt="">
+    </div>
 
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

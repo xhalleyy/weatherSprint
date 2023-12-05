@@ -8,6 +8,21 @@
     src: url(../assets/Philosopher-Bold.ttf);
 }
 
+@font-face {
+    font-family: roboto-light;
+    src: url(../assets/Roboto-Light.ttf);
+}
+
+@font-face {
+    font-family: roboto-reg;
+    src: url(../assets/Roboto-Regular.ttf);
+}
+
+@font-face {
+    font-family: weather-icons;
+    src: url(../assets/artillweather/artilweathericons.ttf);;
+}
+
 /* nav bar */
 .nav-style{
     background-color: white;
@@ -32,12 +47,56 @@
     border-radius: 15px;
 }
 
+.fiveDayWeather,
+.todayText,
+.placeLocation {
+    font-family: roboto-light;
+    font-size: 25px;
+}
+
+.curr-temp-text {
+    font-family: philosopher-reg;
+    font-size: 170px;
+}
+
 .BGImg{
-    background-image: url(../assets/Gradient_builder_2.png);
+    background-image: url(../assets/2870257.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
 }
 
 .whiteBG{
     background-color: white;
+}
+
+.desc-and-temps{
+    font-family: philosopher-reg;
+    font-size: 30px;
+}
+
+.timeText {
+    font-size: 25px;
+}
+
+.timeTempText {
+    font-family: philosopher-reg;
+    font-size: 70px;
+}
+
+#openFavorites {
+    font-family: roboto-reg;
+    font-size: 18px;
+    text-decoration: none;
+    color: #707070;
+    padding-left: 150px;
+    padding-right: 150px;
+}
+
+.sun-btn {
+    width: 60%;
+    position: absolute;
+    top: 270px;
+    left: -300px;
+    z-index: -1;
+    overflow: hidden;
 }
