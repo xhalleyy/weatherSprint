@@ -5,6 +5,7 @@
 
 import { apiKey } from "./hidekey.js";
 import { now, hours, minutes } from "./conversion.js";
+import { weatherIconCode, colorIcon} from "./weathericons.js";
 
 // What Information needs to change when we receive the data from the api
 let cityName = document.getElementById("cityName");
@@ -17,7 +18,11 @@ let todayAMTemp = document.getElementById("todayAMTemp");
 let todayNoonTemp = document.getElementById("todayNoonTemp");
 let todayPMTemp = document.getElementById("todayPMTemp");
 let presentTime = document.getElementById("presentTime");
+let morningIcon = document.getElementById("morningIcon");
+let noonIcon = document.getElementById("noonIcon");
+let nightIcon = document.getElementById("nightIcon");
 
+// day1 - day5 variables show 
 let day1 = document.getElementById("day1");
 let day2 = document.getElementById("day2");
 let day3 = document.getElementById("day3");
@@ -29,21 +34,14 @@ let day3MaxandMin = document.getElementById("day3MaxandMin");
 let day4MaxandMin = document.getElementById("day4MaxandMin");
 let day5MaxandMin = document.getElementById("day5MaxandMin");
 
-let date1 = "";
-let day1Max = "";
-let day2Max = "";
-let day3Max = "";
-let day4Max = "";
-let day5Max = "";
-let day1Min = "";
-let day2Min = "";
-let day3Min = "";
-let day4Min = "";
-let day5Min = "";
+let day1icon = document.getElementById("day1icon");
+let day2icon = document.getElementById("day2icon");
+let day3icon = document.getElementById("day3icon");
+let day4icon = document.getElementById("day4icon");
+let day5icon = document.getElementById("day5icon");
 
 let userInput = document.getElementById("userInput");
 let searchBtn = document.getElementById("searchBtn");
-let searchedData;
 
 navigator.geolocation.getCurrentPosition(success, errorFunc);
 
@@ -69,7 +67,28 @@ async function success(position) {
     minTemp.textContent = `L:${wholeNumMin}°F`;
     currentTemp.textContent = `${wholeNumTemp}°F`;
     weatherText.textContent = currentData.weather[0].description;
-    weatherIcon.innerHTML = weatherData.list[0].weather[0].icon;
+
+    weatherIcon.textContent = weatherIconCode(currentData.weather[0].icon);
+    // console.log(weatherIcon.textContent);
+    morningIcon.textContent = weatherIconCode(weatherData.list[0].weather[0].icon);
+    noonIcon.textContent = weatherIconCode(weatherData.list[1].weather[0].icon);
+    nightIcon.textContent = weatherIconCode(weatherData.list[2].weather[0].icon);
+    day1icon.textContent = weatherIconCode(weatherData.list[4].weather[0].icon);
+    day2icon.textContent = weatherIconCode(weatherData.list[7].weather[0].icon);
+    day3icon.textContent = weatherIconCode(weatherData.list[10].weather[0].icon);
+    day4icon.textContent = weatherIconCode(weatherData.list[13].weather[0].icon);
+    day5icon.textContent = weatherIconCode(weatherData.list[16].weather[0].icon);
+
+    day1MaxandMin.textContent = `${Math.floor(weatherData.list[8].main.temp_max)}°F | ${Math.floor(weatherData.list[6].main.temp_min)}°F`;
+    day2MaxandMin.textContent = `${Math.floor(weatherData.list[15].main.temp_max)}°F | ${Math.floor(weatherData.list[14].main.temp_min)}°F`;
+    day3MaxandMin.textContent = `${Math.floor(weatherData.list[32].main.temp_max)}°F | ${Math.floor(weatherData.list[22].main.temp_min)}°F`;
+    day4MaxandMin.textContent = `${Math.floor(weatherData.list[32].main.temp_max)}°F | ${Math.floor(weatherData.list[30].main.temp_min)}°F`;
+    day5MaxandMin.textContent = `${Math.floor(weatherData.list[39].main.temp_max)}°F | ${Math.floor(weatherData.list[37].main.temp_min)}°F`;
+    
+    weatherIcon.classList.add(colorIcon(currentData.weather[0].icon));
+    morningIcon.classList.add(colorIcon(weatherData.list[0].weather[0].icon));
+    noonIcon.classList.add(colorIcon(weatherData.list[1].weather[0].icon));
+    nightIcon.classList.add(colorIcon(weatherData.list[2].weather[0].icon));
 
     presentTime.textContent = `${hours}:${minutes}`;
     todayAMTemp.textContent = `${wholeNumAM}°`;
@@ -105,13 +124,14 @@ async function CurrentApi(currLatitude, currLongitude){
     return data;
 }
 
-async function SearchCityApi(city, state, countryCode) {
+async function SearchCityApi(city) {
     const promise = await fetch(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${countryCode}&limit=1&appid=${apiKkey}
+        `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=10&appid=${apiKey}
         `
     );
     const data = await promise.json();
-    searchedData = data[0].name.toLowerCase();
+    console.log(data);
+    cityName.textContent = `${data[0].name.toUpperCase()}, ${data[0].state.toUpperCase()}, ${data[0].country.toUpperCase()}`
 }
 
 // const citySearchData = await SearchCityApi(city, state, countryCode);
@@ -121,44 +141,46 @@ async function SearchCityApi(city, state, countryCode) {
 // Geocoding API
 // api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
 
-function findCity (){
-    // reassigning the input to another variable so that the value is saved
-    let cityInput = userInput.value.toLowerCase();
+// function findCity (){
+//     // reassigning the input to another variable so that the value is saved
+//     let cityInput = userInput.value.toLowerCase();
 
-    if(cityInput === searchedData){
-        console.log(searchedData);
-    }
-
-}
-
-searchBtn.addEventListener('click', function(e){
-    findCity();
-});
-
-// function findStudent(){
-//     // reassign the value of userInput to studentInput so that the input is saved
-//     let studentInput = userInput.value.toLowerCase();
-
-//     for(let i = 0; i < students.length; i++){
-
-//         // every time we loop/iterate, we save their student here
-//         let currentStudent = students[i]
-//         if(studentInput === currentStudent.firstName.toLowerCase()){
-
-//             matchingStudent = currentStudent;
-//         }
+//     if(cityInput === searchedData){
+//         console.log(searchedData);
 //     }
 
-//     if(matchingStudent){
-//         // inner text doesn't include any white space if you console
-//         studentName.innerText = `${matchingStudent.firstName} ${matchingStudent.lastName}`;
-//         studentNumber.innerText = matchingStudent.phoneNumber;
-//         studentEmail.innerText = matchingStudent.email;
-//     }else{
-//         studentName.innerText = "Student not Found";
-//     }
 // }
 
-// submitBtn.addEventListener('click', function(e){
-//     findStudent();
-//    });
+searchBtn.addEventListener('click', async function(e){
+    // console.log(userInput.value);
+    await SearchCityApi(userInput.value);
+});
+
+
+// day / night mode variable to change , add/remove classes
+let dayMode = document.getElementById("dayMode");
+let navbarColor = document.getElementById("navbarColor");
+let navTitle = document.getElementById("navTitle");
+let darkCurrLocation = document.getElementById("darkCurrLocation");
+let darkCurrTimes = document.getElementById("darkCurrTimes");
+let morningTime = document.getElementById("morningTime");
+let noonTime = document.getElementById("noonTime");
+let nightTime = document.getElementById("nightTime");
+
+// click day/sun button and changes to dark mode
+dayMode.addEventListener('click', function(e){
+    navbarColor.classList.add('darkModeColor');
+    navbarColor.classList.remove('nav-style');
+    userInput.classList.remove('box-shadow');
+    navTitle.classList.add('darkModeTitle');
+    darkCurrLocation.classList.add('darkModeColor');
+    darkCurrLocation.classList.add('white-font');
+    darkCurrTimes.classList.add('darkModeColor');
+    darkCurrTimes.classList.add('white-font');
+    morningTime.classList.add('white-font');
+    noonTime.classList.add('white-font');
+    nightTime.classList.add('white-font');
+    todayAMTemp.classList.add('white-font');
+    todayNoonTemp.classList.add('white-font');
+    todayPMTemp.classList.add('white-font');
+});

@@ -10,20 +10,18 @@
   <body class="BGImg">
 
     <!-- NavBar and Search field -->
-    <nav class="nav nav-style">
+    <nav id="navbarColor" class="nav nav-style">
       <div class="container">
         <div class="row">
           <div class="col-1"></div>
           <div class="col">
-            <a class="nav-link" href="#"><h1 class="weatherTitle py-0">climate.xchange</h1></a>
+            <a class="nav-link" href="#"><h1 id="navTitle" class="weatherTitle py-0">climate.xchange</h1></a>
           </div>
-          <div class="col d-flex justify-content-end align-items-center">
-            <form class="d-flex" role="search">
-              <input id="userInput" class="form-control border-rad me-3" type="search" placeholder="Search for a City" aria-label="Search">
-              <button id="searchBtn" class="btn border-rad search-icon-btn" type="submit"><img class="img-fluid" width="28px" height="40px" src="./assets/Search-Button-White-PNG.png" alt=""></button>
-            </form>
+          <div class="col d-flex justify-content-end align-items-center pe-0">
+              <input id="userInput" class="form-control box-shadow border-rad me-3" type="text" placeholder="Search for a City" aria-label="Search">
+              <button id="searchBtn" class="btn border-rad search-icon-btn" type="button"><img class="img-fluid" width="28px" height="40px" src="./assets/Search-Button-White-PNG.png" alt=""></button>
           </div>
-          <div class="col-1"></div>
+          <div class="col-1 ps-0"></div>
         </div>
       </div>
     </nav>
@@ -31,12 +29,17 @@
     <div class="container">
       <div class="row">
         <div class="col-1"></div>
-        <div class="col-5 whiteBG border-rad darkGrayColor my-5 me-3 px-4">
+        <div id="darkCurrLocation" class="col-5 whiteBG border-rad darkGrayColor mt-5 mb-3 me-3 px-4">
           <div class="row">
-            <div id="cityName" class="col placeLocation pt-4">LOCATION</div>
+            <div class="col-11">
+              <div id="cityName" class="col placeLocation pt-4">LOCATION</div>
+            </div>
+            <div class="col-1 d-flex justify-content-end align-items-center pt-4">
+              <img id="favoritesBtn" src="./assets/heartoutline.png" alt="" width="150%" height="30px">
+            </div>
           </div>
           <div class="row">
-            <div id="weatherIcon" class="col-3 d-flex justify-content-center">Image/Icon</div>
+            <div id="weatherIcon" class="col-3 d-flex justify-content-center align-items-center iconFont current-icon-font"></div>
             <div id="currentTemp" class="curr-temp-text col d-flex justify-content-end pe-4">Temp.</div>
           </div>
           <!-- <div class="horizontal-dotted-line"></div>></div> -->
@@ -52,25 +55,25 @@
           </div>
         </div>
         <!-- Current's Date and 3 Hr Forecast -->
-        <div class="col-5 border-rad whiteBG my-5 ms-2 pt-4 px-4">
+        <div id="darkCurrTimes" class="col-5 border-rad whiteBG mt-5 mb-3 ms-2 pt-4 px-4">
           <div class="row">
-            <div class="col todayText">TODAY</div>
+            <div class="col todayText mb-2">TODAY</div>
             <div id="presentTime" class="col d-flex justify-content-end pe-3">Current Time</div>
           </div>
-          <div class="row mt-3">
-            <div class="col-4 text-center">
-              <p class="timeText lightGrayColor">8am</p>
-              <img src="" alt="">
+          <div class="row mt-4">
+            <div class="col-4 text-center vl">
+              <p id="morningTime" class="timeText lightGrayColor">8am</p>
+              <p id="morningIcon" class="iconFont curr-times-font" ></p>
               <h2 id="todayAMTemp" class="timeTempText darkGrayColor">Temp</h2>
             </div>
-            <div class="col-4 text-center">
-              <p class="timeText">noon</p>
-              <img src="" alt="">
+            <div class="col-4 text-center vl">
+              <p id="noonTime" class="timeText">noon</p>
+              <p id="noonIcon" class="iconFont curr-times-font"></p>
               <h2 id="todayNoonTemp" class="timeTempText darkGrayColor">Temp</h2>
             </div>
             <div class="col-4 text-center">
-              <p class="timeText">8pm</p>
-              <img src="" alt="">
+              <p id="nightTime" class="timeText">8pm</p>
+              <p id="nightIcon" class="iconFont curr-times-font"></p>
               <h2 id="todayPMTemp" class="timeTempText darkGrayColor">Temp</h2>
             </div>
           </div>
@@ -79,48 +82,53 @@
       </div>
     </div>
 
-    <div class="container fiveDayWeather mb-5" style="opacity: .7;">
+    <div class="container fiveDayWeather mb-4">
       <div class="row">
         <div class="col-1"></div>
 
-        <div class="col-2 whiteBG border-rad d-flex justify-content-center me-2">
+        <div class="col-2 transparentBG border-rad text-center me-2">
           <h3 id="day1" class="pt-3">Day</h3>
-          <div id="day1icon"></div>
-          <div id="day1MaxandMin"></div>
+          <p id="day1icon" class="iconFont days-font"></p>
+          <div id="day1MaxandMin" class="dates-text pb-3">Temp</div>
         </div>
-        <div class="col-2 whiteBG border-rad d-flex justify-content-center me-2">
+        <div class="col-2 transparentBG border-rad text-center me-2">
           <h3 id="day2" class="pt-3"> Day</h3>
-          <div id="day2icon"></div>
-          <div id="day2MaxandMin"></div>
+          <p id="day2icon" class="iconFont days-font"></p>
+          <div id="day2MaxandMin" class="dates-text pb-3">Temp</div>
         </div>
-        <div class="col-2 whiteBG border-rad d-flex justify-content-center me-2">
+        <div class="col-2 transparentBG border-rad text-center me-2">
           <h3 id="day3" class="pt-3">Day</h3>
-          <div id="day3icon"></div>
-          <div id="day3MaxandMin"></div>
+          <p id="day3icon" class="iconFont days-font"></p>
+          <div id="day3MaxandMin" class="dates-text pb-3">Temp</div>
         </div>
-        <div class="col-2 whiteBG border-rad d-flex justify-content-center me-2">
+        <div class="col-2 transparentBG border-rad text-center me-2">
           <h3 id="day4" class="pt-3"> Day</h3>
-          <div id="day4icon"></div>
-          <div id="day4MaxandMin"></div>
+          <p id="day4icon" class="iconFont days-font"></p>
+          <div id="day4MaxandMin" class="dates-text pb-3">Temp</div>
         </div>
-        <div class="col-2 whiteBG border-rad d-flex justify-content-center ">
+        <div class="col-2 transparentBG border-rad text-center ">
           <h3 id="day5" class="pt-3">Day</h3>
-          <div id="day5icon"></div>
-          <div id="day5MaxandMin"></div>
+          <p id="day5icon" class="iconFont days-font"></p>
+          <div id="day5MaxandMin" class="dates-text pb-3">Temp</div>
         </div>
 
         <div class="col-1"></div>
       </div>
     </div>
 
-    <div class="container d-flex justify-content-center align-items-center">
-      <a id="openFavorites" class="whiteBG py-3" style="border-radius: 25px;" href="">
-        <p class="my-0">Open Your Favorite Places</p>
+    <div class="container d-flex justify-content-center">
+      <a id="openFavorites" class="whiteBG favorites-style" href="">
+        <p class="my-0 text-center d-flex align-items-center"><span class="heart-text">❤</span> Open Your Favorite Places</p>
       </a>
     </div>
 
-    <div class="first">
+
+    <!-- <div class="first">
       <img class="sun-btn" src="./assets/Yellow-Circle-PNG-Free-Image.png" alt="">
+    </div> -->
+
+    <div class="container-fluid">
+        <img id="dayMode" class="croppedSun" src="./assets/croppedyellow.png" alt="">
     </div>
 
     <!-- <div class="sunImage"></div> -->
