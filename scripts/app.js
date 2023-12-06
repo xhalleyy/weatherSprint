@@ -43,14 +43,17 @@ let day5icon = document.getElementById("day5icon");
 let userInput = document.getElementById("userInput");
 let searchBtn = document.getElementById("searchBtn");
 
+let currLatitude;
+let currLongitude;
+
 navigator.geolocation.getCurrentPosition(success, errorFunc);
 
 // Success leads to initial load of page where data of the location is displayed
 async function success(position) {
     console.log("Our latitude: " + position.coords.latitude);
     console.log("Our longitude: " + position.coords.longitude);
-    let currLatitude = position.coords.latitude;
-    let currLongitude = position.coords.longitude;
+    currLatitude = position.coords.latitude;
+    currLongitude = position.coords.longitude;
     const weatherData = await ForecastApi(currLatitude, currLongitude);
     const currentData = await CurrentApi(currLatitude, currLongitude);
 
@@ -69,19 +72,18 @@ async function success(position) {
     weatherText.textContent = currentData.weather[0].description;
 
     weatherIcon.textContent = weatherIconCode(currentData.weather[0].icon);
-    // console.log(weatherIcon.textContent);
     morningIcon.textContent = weatherIconCode(weatherData.list[0].weather[0].icon);
     noonIcon.textContent = weatherIconCode(weatherData.list[1].weather[0].icon);
     nightIcon.textContent = weatherIconCode(weatherData.list[2].weather[0].icon);
-    day1icon.textContent = weatherIconCode(weatherData.list[4].weather[0].icon);
-    day2icon.textContent = weatherIconCode(weatherData.list[7].weather[0].icon);
-    day3icon.textContent = weatherIconCode(weatherData.list[10].weather[0].icon);
-    day4icon.textContent = weatherIconCode(weatherData.list[13].weather[0].icon);
-    day5icon.textContent = weatherIconCode(weatherData.list[16].weather[0].icon);
+    day1icon.textContent = weatherIconCode(weatherData.list[5].weather[0].icon);
+    day2icon.textContent = weatherIconCode(weatherData.list[13].weather[0].icon);
+    day3icon.textContent = weatherIconCode(weatherData.list[27].weather[0].icon);
+    day4icon.textContent = weatherIconCode(weatherData.list[31].weather[0].icon);
+    day5icon.textContent = weatherIconCode(weatherData.list[35].weather[0].icon);
 
     day1MaxandMin.textContent = `${Math.floor(weatherData.list[8].main.temp_max)}°F | ${Math.floor(weatherData.list[6].main.temp_min)}°F`;
     day2MaxandMin.textContent = `${Math.floor(weatherData.list[15].main.temp_max)}°F | ${Math.floor(weatherData.list[14].main.temp_min)}°F`;
-    day3MaxandMin.textContent = `${Math.floor(weatherData.list[32].main.temp_max)}°F | ${Math.floor(weatherData.list[22].main.temp_min)}°F`;
+    day3MaxandMin.textContent = `${Math.floor(weatherData.list[27].main.temp_max)}°F | ${Math.floor(weatherData.list[22].main.temp_min)}°F`;
     day4MaxandMin.textContent = `${Math.floor(weatherData.list[32].main.temp_max)}°F | ${Math.floor(weatherData.list[30].main.temp_min)}°F`;
     day5MaxandMin.textContent = `${Math.floor(weatherData.list[39].main.temp_max)}°F | ${Math.floor(weatherData.list[37].main.temp_min)}°F`;
     
@@ -90,7 +92,7 @@ async function success(position) {
     noonIcon.classList.add(colorIcon(weatherData.list[1].weather[0].icon));
     nightIcon.classList.add(colorIcon(weatherData.list[2].weather[0].icon));
 
-    presentTime.textContent = `${hours}:${minutes}`;
+    // presentTime.textContent = `${hours}:${minutes}`;
     todayAMTemp.textContent = `${wholeNumAM}°`;
     todayNoonTemp.textContent = `${wholeNumNoon}°`;
     todayPMTemp.textContent = `${wholeNumPM}°`;
@@ -131,25 +133,47 @@ async function SearchCityApi(city) {
     );
     const data = await promise.json();
     console.log(data);
-    cityName.textContent = `${data[0].name.toUpperCase()}, ${data[0].state.toUpperCase()}, ${data[0].country.toUpperCase()}`
+    cityName.textContent = `${data[0].name}, ${data[0].state}, ${data[0].country}`
+    currLatitude = data[0].lat;
+    // console.log(currLatitude);
+    currLongitude = data[0].lon;
+
+    const cityWeatherData = await ForecastApi(currLatitude, currLongitude);
+    console.log(cityWeatherData);
+    const currentCityData = await CurrentApi(currLatitude, currLongitude); 
+    console.log(currentCityData);
+
+    currentTemp.textContent = `${Math.floor(currentCityData.main.temp)}°F`;
+    maxTemp.textContent = `H:${Math.floor(currentCityData.main.temp_max)}°F`;
+    minTemp.textContent = `L:${Math.floor(currentCityData.main.temp_min)}°F`;
+    weatherText.textContent = currentCityData.weather[0].description;
+    // presentTime.textContent = `${hours}:${minutes}`;
+    todayAMTemp.textContent = `${Math.floor(cityWeatherData.list[0].main.temp)}°`;
+    todayNoonTemp.textContent = `${Math.floor(cityWeatherData.list[1].main.temp)}°`;
+    todayPMTemp.textContent = `${Math.floor(cityWeatherData.list[2].main.temp)}°`;
+
+    weatherIcon.textContent = weatherIconCode(currentCityData.weather[0].icon);
+    morningIcon.textContent = weatherIconCode(cityWeatherData.list[0].weather[0].icon);
+    noonIcon.textContent = weatherIconCode(cityWeatherData.list[1].weather[0].icon);
+    nightIcon.textContent = weatherIconCode(cityWeatherData.list[2].weather[0].icon);
+    day1icon.textContent = weatherIconCode(cityWeatherData.list[5].weather[0].icon);
+    day2icon.textContent = weatherIconCode(cityWeatherData.list[13].weather[0].icon);
+    day3icon.textContent = weatherIconCode(cityWeatherData.list[27].weather[0].icon);
+    day4icon.textContent = weatherIconCode(cityWeatherData.list[31].weather[0].icon);
+    day5icon.textContent = weatherIconCode(cityWeatherData.list[35].weather[0].icon);
+
+    day1MaxandMin.textContent = `${Math.floor(cityWeatherData.list[8].main.temp_max)}°F | ${Math.floor(cityWeatherData.list[6].main.temp_min)}°F`;
+    day2MaxandMin.textContent = `${Math.floor(cityWeatherData.list[15].main.temp_max)}°F | ${Math.floor(cityWeatherData.list[14].main.temp_min)}°F`;
+    day3MaxandMin.textContent = `${Math.floor(cityWeatherData.list[27].main.temp_max)}°F | ${Math.floor(cityWeatherData.list[22].main.temp_min)}°F`;
+    day4MaxandMin.textContent = `${Math.floor(cityWeatherData.list[32].main.temp_max)}°F | ${Math.floor(cityWeatherData.list[30].main.temp_min)}°F`;
+    day5MaxandMin.textContent = `${Math.floor(cityWeatherData.list[39].main.temp_max)}°F | ${Math.floor(cityWeatherData.list[37].main.temp_min)}°F`;
+
+    // weatherIcon.classList.add(colorIcon(currentCityData.weather[0].icon));
+    // morningIcon.classList.add(colorIcon(cityWeatherData.list[0].weather[0].icon));
+    // noonIcon.classList.add(colorIcon(cityWeatherData.list[1].weather[0].icon));
+    // nightIcon.classList.add(colorIcon(cityWeatherData.list[2].weather[0].icon));
+
 }
-
-// const citySearchData = await SearchCityApi(city, state, countryCode);
-// console.log(citySearchData);
-
-// Built in geo-code is deprecated so have to change to geocoding api when there
-// Geocoding API
-// api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
-
-// function findCity (){
-//     // reassigning the input to another variable so that the value is saved
-//     let cityInput = userInput.value.toLowerCase();
-
-//     if(cityInput === searchedData){
-//         console.log(searchedData);
-//     }
-
-// }
 
 searchBtn.addEventListener('click', async function(e){
     // console.log(userInput.value);
@@ -157,7 +181,9 @@ searchBtn.addEventListener('click', async function(e){
 });
 
 
+
 // day / night mode variable to change , add/remove classes
+let dayModeBtn = document.getElementById("dayModeBtn");
 let dayMode = document.getElementById("dayMode");
 let navbarColor = document.getElementById("navbarColor");
 let navTitle = document.getElementById("navTitle");
@@ -166,9 +192,16 @@ let darkCurrTimes = document.getElementById("darkCurrTimes");
 let morningTime = document.getElementById("morningTime");
 let noonTime = document.getElementById("noonTime");
 let nightTime = document.getElementById("nightTime");
+let date1Box = document.getElementById("date1Box");
+let date2Box = document.getElementById("date2Box");
+let date3Box = document.getElementById("date3Box");
+let date4Box = document.getElementById("date4Box");
+let date5Box = document.getElementById("date5Box");
+let openFavorites = document.getElementById("openFavorites");
+let darkBG = document.getElementById("darkBG");
 
 // click day/sun button and changes to dark mode
-dayMode.addEventListener('click', function(e){
+dayModeBtn.addEventListener('click', function(e){
     navbarColor.classList.add('darkModeColor');
     navbarColor.classList.remove('nav-style');
     userInput.classList.remove('box-shadow');
@@ -183,4 +216,31 @@ dayMode.addEventListener('click', function(e){
     todayAMTemp.classList.add('white-font');
     todayNoonTemp.classList.add('white-font');
     todayPMTemp.classList.add('white-font');
+    date1Box.classList.add('darktransBG');
+    date1Box.classList.add('white-font');
+    date2Box.classList.add('darktransBG');
+    date2Box.classList.add('white-font');
+    date3Box.classList.add('darktransBG');
+    date3Box.classList.add('white-font');
+    date4Box.classList.add('darktransBG');
+    date4Box.classList.add('white-font');
+    date5Box.classList.add('darktransBG');
+    date5Box.classList.add('white-font');
+    day1icon.classList.add('white-font');
+    day2icon.classList.add('white-font');
+    day3icon.classList.add('white-font');
+    day4icon.classList.add('white-font');
+    day5icon.classList.add('white-font');
+    openFavorites.classList.add('darkModeColor');
+    openFavorites.classList.add('white-font');
+    darkBG.classList.remove('BGImg');
+    darkBG.classList.add('grayscale');
+    dayMode.remove();
+
 });
+
+// Create Image and Have it Visible when it's on dark/night mode
+function MoonImage (){
+
+}
+

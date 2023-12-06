@@ -51,15 +51,15 @@ export function colorIcon(icon) {
         case '03d':
             return 'blue';
         case '04d':
-            return 'darkGrayColor';
+            return 'lightGrayColor';
         case '09d':
-            return 'darkGrayColor';
+            return 'lightGrayColor';
         case '10d':
             return 'blue';
         case '11d':
-            return 'darkGrayColor';
+            return 'lightGrayColor';
         case '13d':
-            return 'darkGrayColor';
+            return 'lightGrayColor';
         case '50d':
             return 'blue';
         case '01n':
@@ -69,18 +69,18 @@ export function colorIcon(icon) {
         case '03n':
             return 'purple';
         case '04n':
-            return 'darkGrayColor';
+            return 'lightGrayColor';
         case '09n':
-            return 'darkGrayColor';
+            return 'lightGrayColor';
         case '10n':
             return 'purple';
         case '11n':
             return 'purple';
         case '13n':
-            return 'darkGrayColor';
+            return 'lightGrayColor';
         case '50n':
             return 'purple';
         default:
-            return 'darkGrayColor';
+            return 'lightGrayColor';
     }
 }

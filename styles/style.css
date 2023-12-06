@@ -90,14 +90,14 @@
     background-attachment: fixed;
 }
 
-.BGImg::after {
+/* .BGImg::after {
     content: "";
     position: absolute;
     width: inherit;
     height: inherit;
     background: linear-gradient(to bottom, rgb(141, 171, 216), white);
     -webkit-mask-image: linear-gradient(to left, white, transparent);
-}
+} */
 
 .whiteBG {
     background-color: white;
@@ -146,7 +146,7 @@
     position: absolute;
     top: 270px;
     left: -300px;
-    z-index: -1;
+    z-index: 1;
     overflow: hidden;
 }
 
@@ -193,7 +193,7 @@
 }
 
 .current-icon-font {
-    font-size: 250px;
+    font-size: 200px;
     padding-left: 90px;
 }
 
@@ -239,9 +239,37 @@
 }
 
 .transparentBG {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.5);
 }
+
+.darktransBG {
+    background: rgba(47, 47, 47, .5) !important;
+}
+
+.grayscale {
+    background: 
+     linear-gradient(to top left, rgb(89, 118, 130), rgba(255, 153, 150, 0), rgb(116, 65, 133)), linear-gradient(to top right, rgb(62, 69, 128), rgba(255, 153, 150, 0), rgb(191, 172, 207)) rgb(96, 108, 124);
+    background-attachment: fixed;
+}
+
+/* linear-gradient(to top left, rgba(205, 164, 231, 1), rgba(255, 153, 150, 0), rgba(145, 220, 250, 1)), linear-gradient(to top right, rgba(217, 183, 242, 1), rgba(255, 153, 150, 0), rgba(74, 93, 240, 1)) rgb(141, 171, 216); */
+
+/* rgba(205, 164, 231, 1) dark purple  top left
+rgba(145, 220, 250, 1 light blue  bottom right
+rgba(217, 183, 242, 1) light purple  top right
+rgba(74, 93, 240, 1)) dark blue  bottom left
+rgb(141, 171, 216); middle
+*/
 
 .white-font {
     color: white !important;
 }
+
+.sidebar-box{
+    box-sizing: content-box;
+    width: 18%;
+}
+
+/* .remove-space {
+    line-height: 100%;
+} */

@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="./styles/style.css">
   </head>
-  <body class="BGImg">
+  <body id="darkBG" class="BGImg">
 
     <!-- NavBar and Search field -->
     <nav id="navbarColor" class="nav nav-style">
@@ -39,8 +39,8 @@
             </div>
           </div>
           <div class="row">
-            <div id="weatherIcon" class="col-3 d-flex justify-content-center align-items-center iconFont current-icon-font"></div>
-            <div id="currentTemp" class="curr-temp-text col d-flex justify-content-end pe-4">Temp.</div>
+            <div id="weatherIcon" class="col-3 d-flex justify-content-center align-items-center iconFont current-icon-font remove-space"></div>
+            <div id="currentTemp" class="curr-temp-text col d-flex justify-content-end pe-4 remove-space">Temp.</div>
           </div>
           <!-- <div class="horizontal-dotted-line"></div>></div> -->
           <div class="row pb-4 desc-and-temps">
@@ -86,27 +86,27 @@
       <div class="row">
         <div class="col-1"></div>
 
-        <div class="col-2 transparentBG border-rad text-center me-2">
+        <div id="date1Box" class="col-2 transparentBG border-rad text-center me-2">
           <h3 id="day1" class="pt-3">Day</h3>
           <p id="day1icon" class="iconFont days-font"></p>
           <div id="day1MaxandMin" class="dates-text pb-3">Temp</div>
         </div>
-        <div class="col-2 transparentBG border-rad text-center me-2">
+        <div id="date2Box" class="col-2 transparentBG border-rad text-center me-2">
           <h3 id="day2" class="pt-3"> Day</h3>
           <p id="day2icon" class="iconFont days-font"></p>
           <div id="day2MaxandMin" class="dates-text pb-3">Temp</div>
         </div>
-        <div class="col-2 transparentBG border-rad text-center me-2">
+        <div id="date3Box" class="col-2 transparentBG border-rad text-center me-2">
           <h3 id="day3" class="pt-3">Day</h3>
           <p id="day3icon" class="iconFont days-font"></p>
           <div id="day3MaxandMin" class="dates-text pb-3">Temp</div>
         </div>
-        <div class="col-2 transparentBG border-rad text-center me-2">
+        <div id="date4Box" class="col-2 transparentBG border-rad text-center me-2">
           <h3 id="day4" class="pt-3"> Day</h3>
           <p id="day4icon" class="iconFont days-font"></p>
           <div id="day4MaxandMin" class="dates-text pb-3">Temp</div>
         </div>
-        <div class="col-2 transparentBG border-rad text-center ">
+        <div id="date5Box" class="col-2 transparentBG border-rad text-center ">
           <h3 id="day5" class="pt-3">Day</h3>
           <p id="day5icon" class="iconFont days-font"></p>
           <div id="day5MaxandMin" class="dates-text pb-3">Temp</div>
@@ -122,18 +122,22 @@
       </a>
     </div>
 
-
-    <!-- <div class="first">
-      <img class="sun-btn" src="./assets/Yellow-Circle-PNG-Free-Image.png" alt="">
-    </div> -->
-
-    <div class="container-fluid">
-        <img id="dayMode" class="croppedSun" src="./assets/croppedyellow.png" alt="">
+    <div id="dayMode" class="container-fluid">
+        <img id="dayModeBtn" class="croppedSun" src="./assets/croppedyellow.png" alt="">
     </div>
 
-    <!-- <div class="sunImage"></div> -->
+    <!-- To see how the favorite's side bar will look -->
 
+    <!-- <div class="container-fluid">
+      <div class="row">
+        <div class="col-3 whiteBG sidebar-box">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus animi deleniti ad assumenda iure officia fugiat est blanditiis, odio, tempore molestias voluptatibus eveniet. Temporibus eos sit consequuntur quis nobis corrupti.</div>
+      </div>
+    </div> -->
     
+    <div class="modal-dialog modal-lg">...</div>
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script type="module" src="./scripts/app.js"></script>
   </body>
