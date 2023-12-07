@@ -123,7 +123,6 @@
 .timeText {
     font-family: roboto-thin;
     font-size: 25px;
-    font-weight: bold;
     color: #6D6D6D;
 }
 
@@ -227,7 +226,7 @@
 }
 
 .clearNight {
-    font-size: 200px !important;
+    font-size: 200px;
     color: #D1C0D8;
 }
 
@@ -239,7 +238,7 @@
 }
 
 .transparentBG {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.6);
 }
 
 .darktransBG {
@@ -273,3 +272,21 @@ rgb(141, 171, 216); middle
 /* .remove-space {
     line-height: 100%;
 } */
+
+.dottedLine {
+    border: none;
+    border-top: 4px dotted #454545;
+    height: 5px;
+}
+
+.bgOpacity {
+    background: rgba(255, 255, 255, 0.75);
+}
+
+.favoritesOpacity {
+    background: rgba(255, 255, 255, 0.85)
+}
+
+.side-panel-toggle {
+
+}
