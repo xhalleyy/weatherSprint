@@ -3,7 +3,7 @@ import { SearchCityApi, removeFav, dayModeBtn } from "./app.js";
 let futureTimes = document.getElementById("futureTimes");
 
 
-function OtherDatesInfo() {
+function OtherDatesInfo(nightMode) {
     futureTimes.innerHTML = " ";
 
     // Inner Portion: Morning
@@ -105,7 +105,11 @@ function OtherDatesInfo() {
     // outer divs of the columns and rows
     let outCol2 = document.createElement("div");
     outCol2.id = "selectedDark";
-    outCol2.className = "col bgOpacity border-rad opacity py-4 px-5 mb-4 remove-margin";
+    if(nightMode){
+      outCol2.className = "col selectedDarkBG border-rad opacity py-4 px-5 mb-4 remove-margin";
+    }else{
+      outCol2.className = "col bgOpacity border-rad opacity py-4 px-5 mb-4 remove-margin";
+    }
 
   //  let selectedDark = document.getElementById("selectedDark");
     // let selectedDark = document.getElementById()

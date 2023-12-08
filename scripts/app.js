@@ -48,6 +48,7 @@ let searchBtn = document.getElementById("searchBtn");
 let currLatitude;
 let currLongitude;
 let weatherData;
+let darkMode = false;
 
 let webTitle = document.getElementById("webTitle");
 
@@ -249,14 +250,12 @@ let date5Box = document.getElementById("date5Box");
 let openFavorites = document.getElementById("openFavorites");
 let darkBG = document.getElementById("darkBG");
 let offcanvas = document.getElementById("offcanvas");
-// let selectedDark = document.getElementById("selectedDark");
 
-// let darkMode = false;
-let darkMode = false;
+
 // click day/sun button and changes to dark mode
 dayModeBtn.addEventListener('click', function (e) {
     darkMode = !darkMode;
-    if (darkMode) {
+    // if (darkMode) {
         navbarColor.classList.add('darkModeColor');
         navbarColor.classList.remove('nav-style');
         userInput.classList.remove('box-shadow');
@@ -290,28 +289,32 @@ dayModeBtn.addEventListener('click', function (e) {
         openFavorites.classList.add('white-font');
         darkBG.classList.remove('BGImg');
         darkBG.classList.add('grayscale');
-        dayMode.remove();
-        // nightMode.add();
+        dayMode.classList.add('d-none');
+        nightMode.classList.remove('d-none');
         darkModeBtn.src = "../assets/moonimage.png";
         darkModeBtn.classList.remove('d-none');
         offcanvas.classList.add('selectedDarkBG');
         offcanvas.classList.remove('favoritesOpacity');
         offcanvas.classList.add('white-font');
-        // closeOffCanvasBtn.classList.add('dark-btn-close');
         closeOffCanvasBtn.classList.add('btn-close-white');
-        let selectedDark = document.getElementById('selectedDark');
-        console.log(selectedDark);
-        
-        // selectedDark.className = "col selectedDarkBG border-rad opacity py-4 px-5 mb-4 remove-margin";
+        // let selectedDark = document.getElementById('selectedDark');
         // console.log(selectedDark);
-    }
+
+        if(darkMode ){
+            let selectedDark = document.getElementById("selectedDark");
+            if(selectedDark){
+                selectedDark.className = "col selectedDarkBG border-rad opacity py-4 px-5 mb-4 remove-margin";
+            }
+        }
+        // console.log(selectedDark);
+    // }
     
 });
 
 darkModeBtn.addEventListener('click', function(e){
     darkMode = !darkMode;
 
-    if(darkMode) {
+   
         navbarColor.classList.remove('darkModeColor');
         navbarColor.classList.add('nav-style');
         userInput.classList.add('box-shadow');
@@ -345,15 +348,22 @@ darkModeBtn.addEventListener('click', function(e){
         openFavorites.classList.remove('white-font');
         darkBG.classList.add('BGImg');
         darkBG.classList.remove('grayscale');
-        nightMode.remove();
+        nightMode.classList.add('d-none');
+        dayMode.classList.remove('d-none');
         dayModeBtn.src = "../assets/croppedyellow.png";
         dayModeBtn.classList.add('croppedSun');
         // offcanvas.classList.remove('selectedDarkBG');
         offcanvas.classList.add('favoritesOpacity');
         offcanvas.classList.remove('white-font');
         closeOffCanvasBtn.classList.remove('btn-close-white');
-        
-    }
+           
+        if(!darkMode){
+            let selectedDark = document.getElementById("selectedDark");
+            if(selectedDark)
+            {
+                selectedDark.className = "col bgOpacity border-rad opacity py-4 px-5 mb-4 remove-margin";
+            }
+        }
 });
 
 // let futureTimes = document.getElementById("futureTimes");
@@ -369,7 +379,7 @@ date1Box.addEventListener('click', function (e) {
     date1Box.classList.add("bgOpacity");
     active = !active;
     inactive = false;
-    OtherDatesInfo();
+    OtherDatesInfo(darkMode);
     let futureDate1 = document.getElementById("futureDate1");
     let future1Desc = document.getElementById("future1Desc");
     let morning1Icon = document.getElementById("morning1Icon");
@@ -411,7 +421,7 @@ date2Box.addEventListener('click', function (e) {
     date2Box.classList.add("bgOpacity");
     inactive = !inactive;
     active = false;
-    OtherDatesInfo();
+    OtherDatesInfo(darkMode);
     let futureDate1 = document.getElementById("futureDate1");
     let future1Desc = document.getElementById("future1Desc");
     let morning1Icon = document.getElementById("morning1Icon");
@@ -448,7 +458,7 @@ date3Box.addEventListener('click', function (e) {
     date3Box.classList.add("bgOpacity");
     inactive = !inactive;
     active = false;
-    OtherDatesInfo();
+    OtherDatesInfo(darkMode);
     let futureDate1 = document.getElementById("futureDate1");
     let future1Desc = document.getElementById("future1Desc");
     let morning1Icon = document.getElementById("morning1Icon");
@@ -485,7 +495,7 @@ date4Box.addEventListener('click', function (e) {
     date4Box.classList.add("bgOpacity");
     inactive = !inactive;
     active = false;
-    OtherDatesInfo();
+    OtherDatesInfo(darkMode);
     let futureDate1 = document.getElementById("futureDate1");
     let future1Desc = document.getElementById("future1Desc");
     let morning1Icon = document.getElementById("morning1Icon");
@@ -522,7 +532,7 @@ date5Box.addEventListener('click', function (e) {
     date5Box.classList.add("bgOpacity");
     inactive = !inactive;
     active = false;
-    OtherDatesInfo();
+    OtherDatesInfo(darkMode);
     let futureDate1 = document.getElementById("futureDate1");
     let future1Desc = document.getElementById("future1Desc");
     let morning1Icon = document.getElementById("morning1Icon");
