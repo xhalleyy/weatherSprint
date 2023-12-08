@@ -263,6 +263,10 @@
     background: rgba(47, 47, 47, .5) !important;
 }
 
+.selectedDarkBG {
+    background: rgba(47, 47, 47, .8) !important;
+}
+
 .grayscale {
     background: 
      linear-gradient(to top left, rgb(65, 74, 78), rgba(255, 153, 150, 0), rgb(64, 49, 70)), linear-gradient(to top right, rgb(44, 47, 75), rgba(255, 153, 150, 0), rgb(136, 130, 141)) rgb(96, 108, 124);
@@ -300,6 +304,11 @@
 
 .btn-close {
     border: 2px solid black;
+    border-radius: 20px;
+}
+
+.btn-close-white {
+    border: 2px solid white !important;
     border-radius: 20px;
 }
 

@@ -7,6 +7,7 @@ import { apiKey } from "./hidekey.js";
 import { formatTime } from "./conversion.js";
 import { weatherIconCode, colorIcon } from "./weathericons.js";
 import { futureTimes, OtherDatesInfo, OffCanvasCity } from "./elements.js";
+export { removeFav, dayModeBtn }
 
 // What Information needs to change when we receive the data from the api
 let cityName = document.getElementById("cityName");
@@ -50,7 +51,7 @@ let weatherData;
 
 let webTitle = document.getElementById("webTitle");
 
-webTitle.addEventListener("click", function(e){
+webTitle.addEventListener("click", function (e) {
     location.reload();
 });
 
@@ -218,20 +219,21 @@ export async function SearchCityApi(city) {
 
 let modal = new bootstrap.Modal(document.getElementById("modal"));
 searchBtn.addEventListener('click', async function (e) {
-    // console.log(userInput.value);
-    try{
-        
+    // 
+    try {
+
         await SearchCityApi(userInput.value);
     } catch (error) {
         modal.show()
     }
-    // if()
 });
 
 
 // day / night mode variable to change , add/remove classes
 let dayModeBtn = document.getElementById("dayModeBtn");
+let darkModeBtn = document.getElementById("darkModeBtn");
 let dayMode = document.getElementById("dayMode");
+let nightMode = document.getElementById("nightMode");
 let navbarColor = document.getElementById("navbarColor");
 let navTitle = document.getElementById("navTitle");
 let darkCurrLocation = document.getElementById("darkCurrLocation");
@@ -246,47 +248,112 @@ let date4Box = document.getElementById("date4Box");
 let date5Box = document.getElementById("date5Box");
 let openFavorites = document.getElementById("openFavorites");
 let darkBG = document.getElementById("darkBG");
-let darkModeBtn = document.getElementById("darkModeBtn");
+let offcanvas = document.getElementById("offcanvas");
+// let selectedDark = document.getElementById("selectedDark");
 
+// let darkMode = false;
+let darkMode = false;
 // click day/sun button and changes to dark mode
 dayModeBtn.addEventListener('click', function (e) {
-    navbarColor.classList.add('darkModeColor');
-    navbarColor.classList.remove('nav-style');
-    userInput.classList.remove('box-shadow');
-    navTitle.classList.add('darkModeTitle');
-    darkCurrLocation.classList.add('darkModeColor');
-    darkCurrLocation.classList.add('white-font');
-    darkCurrTimes.classList.add('darkModeColor');
-    darkCurrTimes.classList.add('white-font');
-    morningTime.classList.add('white-font');
-    noonTime.classList.add('white-font');
-    nightTime.classList.add('white-font');
-    todayAMTemp.classList.add('white-font');
-    todayNoonTemp.classList.add('white-font');
-    todayPMTemp.classList.add('white-font');
-    date1Box.classList.add('darktransBG');
-    date1Box.classList.add('white-font');
-    date2Box.classList.add('darktransBG');
-    date2Box.classList.add('white-font');
-    date3Box.classList.add('darktransBG');
-    date3Box.classList.add('white-font');
-    date4Box.classList.add('darktransBG');
-    date4Box.classList.add('white-font');
-    date5Box.classList.add('darktransBG');
-    date5Box.classList.add('white-font');
-    day1icon.classList.add('white-font');
-    day2icon.classList.add('white-font');
-    day3icon.classList.add('white-font');
-    day4icon.classList.add('white-font');
-    day5icon.classList.add('white-font');
-    openFavorites.classList.add('darkModeColor');
-    openFavorites.classList.add('white-font');
-    darkBG.classList.remove('BGImg');
-    darkBG.classList.add('grayscale');
-    dayMode.remove();
-    darkModeBtn.src = "../assets/moonimage.png";
-    darkModeBtn.classList.remove("d-none");
+    darkMode = !darkMode;
+    if (darkMode) {
+        navbarColor.classList.add('darkModeColor');
+        navbarColor.classList.remove('nav-style');
+        userInput.classList.remove('box-shadow');
+        navTitle.classList.add('darkModeTitle');
+        darkCurrLocation.classList.add('darkModeColor');
+        darkCurrLocation.classList.add('white-font');
+        darkCurrTimes.classList.add('darkModeColor');
+        darkCurrTimes.classList.add('white-font');
+        morningTime.classList.add('white-font');
+        noonTime.classList.add('white-font');
+        nightTime.classList.add('white-font');
+        todayAMTemp.classList.add('white-font');
+        todayNoonTemp.classList.add('white-font');
+        todayPMTemp.classList.add('white-font');
+        date1Box.classList.add('darktransBG');
+        date1Box.classList.add('white-font');
+        date2Box.classList.add('darktransBG');
+        date2Box.classList.add('white-font');
+        date3Box.classList.add('darktransBG');
+        date3Box.classList.add('white-font');
+        date4Box.classList.add('darktransBG');
+        date4Box.classList.add('white-font');
+        date5Box.classList.add('darktransBG');
+        date5Box.classList.add('white-font');
+        day1icon.classList.add('white-font');
+        day2icon.classList.add('white-font');
+        day3icon.classList.add('white-font');
+        day4icon.classList.add('white-font');
+        day5icon.classList.add('white-font');
+        openFavorites.classList.add('darkModeColor');
+        openFavorites.classList.add('white-font');
+        darkBG.classList.remove('BGImg');
+        darkBG.classList.add('grayscale');
+        dayMode.remove();
+        // nightMode.add();
+        darkModeBtn.src = "../assets/moonimage.png";
+        darkModeBtn.classList.remove('d-none');
+        offcanvas.classList.add('selectedDarkBG');
+        offcanvas.classList.remove('favoritesOpacity');
+        offcanvas.classList.add('white-font');
+        // closeOffCanvasBtn.classList.add('dark-btn-close');
+        closeOffCanvasBtn.classList.add('btn-close-white');
+        let selectedDark = document.getElementById('selectedDark');
+        console.log(selectedDark);
+        
+        // selectedDark.className = "col selectedDarkBG border-rad opacity py-4 px-5 mb-4 remove-margin";
+        // console.log(selectedDark);
+    }
+    
+});
 
+darkModeBtn.addEventListener('click', function(e){
+    darkMode = !darkMode;
+
+    if(darkMode) {
+        navbarColor.classList.remove('darkModeColor');
+        navbarColor.classList.add('nav-style');
+        userInput.classList.add('box-shadow');
+        navTitle.classList.remove('darkModeTitle');
+        darkCurrLocation.classList.remove('darkModeColor');
+        darkCurrLocation.classList.remove('white-font');
+        darkCurrTimes.classList.remove('darkModeColor');
+        darkCurrTimes.classList.remove('white-font');
+        morningTime.classList.remove('white-font');
+        noonTime.classList.remove('white-font');
+        nightTime.classList.remove('white-font');
+        todayAMTemp.classList.remove('white-font');
+        todayNoonTemp.classList.remove('white-font');
+        todayPMTemp.classList.remove('white-font');
+        date1Box.classList.remove('darktransBG');
+        date1Box.classList.remove('white-font');
+        date2Box.classList.remove('darktransBG');
+        date2Box.classList.remove('white-font');
+        date3Box.classList.remove('darktransBG');
+        date3Box.classList.remove('white-font');
+        date4Box.classList.remove('darktransBG');
+        date4Box.classList.remove('white-font');
+        date5Box.classList.remove('darktransBG');
+        date5Box.classList.remove('white-font');
+        day1icon.classList.remove('white-font');
+        day2icon.classList.remove('white-font');
+        day3icon.classList.remove('white-font');
+        day4icon.classList.remove('white-font');
+        day5icon.classList.remove('white-font');
+        openFavorites.classList.remove('darkModeColor');
+        openFavorites.classList.remove('white-font');
+        darkBG.classList.add('BGImg');
+        darkBG.classList.remove('grayscale');
+        nightMode.remove();
+        dayModeBtn.src = "../assets/croppedyellow.png";
+        dayModeBtn.classList.add('croppedSun');
+        // offcanvas.classList.remove('selectedDarkBG');
+        offcanvas.classList.add('favoritesOpacity');
+        offcanvas.classList.remove('white-font');
+        closeOffCanvasBtn.classList.remove('btn-close-white');
+        
+    }
 });
 
 // let futureTimes = document.getElementById("futureTimes");
@@ -488,47 +555,55 @@ date5Box.addEventListener('click', function (e) {
     }
 });
 
-// let cityArr = [];
+
 let favoritesBtn = document.getElementById("favoritesBtn");
 let favArray = []
 if (localStorage.getItem("cities")) {
     favArray = JSON.parse(localStorage.getItem("cities"));
 }
 
+
 favoritesBtn.addEventListener('click', function (e) {
     if (favArray.includes(cityName.textContent)) {
-        //remove from local
+        // If fav array already includes the city name, we want to remove the city from local storage
+        // indexOf is getting the index of the city's name
+        // at that index, it is splicing and removing it
+        // also changes the src of the button to a outlined heart
         let index = favArray.indexOf(cityName.textContent);
         favArray.splice(index, 1);
         favoritesBtn.src = "../assets/heartoutline.png";
     } else {
+        // if city is NOT in fav array, then we push the city to fav array
+        // the button image src is changed to filled heart
         favArray.push(cityName.textContent);
         favoritesBtn.src = "../assets/heartfilled.png";
     }
     localStorage.setItem("cities", JSON.stringify(favArray));
 });
+
+// assigned inject instead of city component because cityComponent is our WHOLE offcanvas and I only want to target the body, so not the title nor the close button
 let inject = document.getElementById('inject');
 let closeOffCanvasBtn = document.getElementById('closeOffCanvasBtn');
 openFavorites.addEventListener('click', function (e) {
     inject.innerHTML = "";
-
+    // once you open favorite, we don't want the favorite cities to duplicate, thus we reset innerHTML with ""
+    // if favArray is greater than 0, for each city, our cityComponent function is called, which is creating the element to showcase each city. We are appending cityComponent to the parent inject because inject is the div/area that's below the title and close button.
     if (favArray.length > 0) {
         favArray.forEach(city => {
             let cityComponent = OffCanvasCity(city);
-            // cityComponent.addEventListener('click', function (e) {
-            //     SearchCityApi(city);
-            //     inject.innerHTML = "";
-            // })
             inject.appendChild(cityComponent);
         }
         )
     }
 });
-closeOffCanvasBtn.addEventListener("click", function(e){
+
+closeOffCanvasBtn.addEventListener("click", function (e) {
     inject.innerHTML = "";
 });
 
-export function removeFav(cityName){
+// This function is to remove a city in our favorite's offcanvas
+// exported and imported to elements.js
+function removeFav(cityName) {
     // indexOf is finding the index position where the value lies in the array
     let index = favArray.indexOf(cityName);
     favArray.splice(index, 1);

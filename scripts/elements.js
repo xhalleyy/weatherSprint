@@ -1,5 +1,7 @@
-import { SearchCityApi, removeFav } from "./app.js";
+import { SearchCityApi, removeFav, dayModeBtn } from "./app.js";
+
 let futureTimes = document.getElementById("futureTimes");
+
 
 function OtherDatesInfo() {
     futureTimes.innerHTML = " ";
@@ -102,7 +104,14 @@ function OtherDatesInfo() {
 
     // outer divs of the columns and rows
     let outCol2 = document.createElement("div");
+    outCol2.id = "selectedDark";
     outCol2.className = "col bgOpacity border-rad opacity py-4 px-5 mb-4 remove-margin";
+
+  //  let selectedDark = document.getElementById("selectedDark");
+    // let selectedDark = document.getElementById()
+    // dayModeBtn.addEventListener('click', function(e){
+    //   outCol2.className = "col selectedDarkBG border-rad opacity py-4 px-5 mb-4 remove-margin";
+    // });
 
     outCol2.appendChild(outRow);
 
@@ -145,7 +154,7 @@ function OtherDatesInfo() {
 function OffCanvasCity(cityName){
   let span = document.createElement("span");
   span.className = "material-symbols-outlined";
-  span.textContent = "close";
+  span.textContent = "remove";
   
   let col1 = document.createElement("div");
   col1.className = "col-2 d-flex align-items-center";
@@ -163,6 +172,7 @@ function OffCanvasCity(cityName){
   col2.className = "col-10";
   col2.appendChild(p);
 
+  // When they click on the col2, which displays the city, the searchCityApi function is called.
   col2.addEventListener('click', function (e) {
     SearchCityApi(cityName);
     inject.innerHTML = "";
@@ -189,9 +199,10 @@ function OffCanvasCity(cityName){
   let outerDiv = document.createElement("div");
   outerDiv.classList.add("offcanvas-body");
   
+  // outDiv is the div containing both the city name and the remove button
+  // once col1 which contains just the remove button is clicked, we remove the city and also remove outerDiv
   outerDiv.appendChild(innerDiv);
   col1.addEventListener("click", function(e){
-    // console.log("Hi");
     removeFav(cityName);
     outerDiv.remove();
   })
