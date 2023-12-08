@@ -48,6 +48,12 @@ let currLatitude;
 let currLongitude;
 let weatherData;
 
+let webTitle = document.getElementById("webTitle");
+
+webTitle.addEventListener("click", function(e){
+    location.reload();
+});
+
 
 navigator.geolocation.getCurrentPosition(success, errorFunc);
 
@@ -59,9 +65,9 @@ async function success(position) {
     currLongitude = position.coords.longitude;
     weatherData = await ForecastApi(currLatitude, currLongitude);
     const currentData = await CurrentApi(currLatitude, currLongitude);
-    const currentTime = currentData.dt
-    console.log(new Date(currentTime * 1000));
     console.log(weatherData);
+    console.log(currentData);
+
     let wholeNumTemp = Math.floor(currentData.main.temp);
     let wholeNumMax = Math.floor(currentData.main.temp_max);
     let wholeNumMin = Math.floor(currentData.main.temp_min);
@@ -69,8 +75,7 @@ async function success(position) {
     let wholeNumNoon = Math.floor(weatherData.list[1].main.temp);
     let wholeNumPM = Math.floor(weatherData.list[2].main.temp);
 
-
-    cityName.innerText = "CURRENT LOCATION";
+    cityName.innerText = `${currentData.name.toUpperCase()}, ${currentData.sys.country}`;
     maxTemp.textContent = `H:${wholeNumMax}°F`;
     minTemp.textContent = `L:${wholeNumMin}°F`;
     currentTemp.textContent = `${wholeNumTemp}°F`;
@@ -108,11 +113,6 @@ async function success(position) {
     todayNoonTemp.textContent = `${wholeNumNoon}°`;
     todayPMTemp.textContent = `${wholeNumPM}°`;
 
-    // presentTime.textContent = `${hours}:${minutes}`;
-    // day1.textContent = "";
-    // let date1 = new Date(weatherData.list[3].dt_txt);
-    // let firstdayForecast = date1.getDay();
-    // console.log(firstdayForecast);
     const format = {
         weekday: 'short',
         month: 'numeric',
@@ -137,6 +137,9 @@ async function success(position) {
     const day5Time = new Date(weatherData.list[39].dt * 1000);
     const day5Date = day5Time.toLocaleDateString('en-US', format).split(",");
     day5.textContent = day5Date[0] + day5Date[1];
+
+    const currentTime = formatTime(currentData.dt, currentData.timezone);
+    presentTime.textContent = currentTime;
 }
 
 
@@ -160,7 +163,7 @@ async function CurrentApi(currLatitude, currLongitude) {
     return data;
 }
 
-async function SearchCityApi(city) {
+export async function SearchCityApi(city) {
     const promise = await fetch(
         `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=10&appid=${apiKey}`);
     const data = await promise.json();
@@ -172,8 +175,7 @@ async function SearchCityApi(city) {
     console.log(weatherData);
     const currentCityData = await CurrentApi(currLatitude, currLongitude);
     const currentTime = formatTime(currentCityData.dt, currentCityData.timezone);
-    console.log(currentCityData);
-    console.log(currentTime);
+    presentTime.textContent = currentTime;
 
     cityName.textContent = `${data[0].name.toUpperCase()}, ${data[0].state ? data[0].state.toUpperCase() + "," : ""} ${data[0].country.toUpperCase()}`
     currentTemp.textContent = `${Math.floor(currentCityData.main.temp)}°F`;
@@ -200,7 +202,6 @@ async function SearchCityApi(city) {
     day4icon.textContent = weatherIconCode(weatherData.list[31].weather[0].icon);
     day5icon.textContent = weatherIconCode(weatherData.list[35].weather[0].icon);
 
-    // Math.floor(weatherData.list[15].main.temp_max) > Math.floor(weatherData.list[18].main.temp_min) ? Math.floor(weatherData.list[15].main.temp_max) + "°F | " + Math.floor(weatherData.list[18].main.temp_min) + "°F" : Math.floor(weatherData.list[18].main.temp_min) + "°F | " + Math.floor(weatherData.list[15].main.temp_max) + "°F";
     day1MaxandMin.textContent = Math.floor(weatherData.list[8].main.temp_max) > Math.floor(weatherData.list[6].main.temp_min) ? Math.floor(weatherData.list[8].main.temp_max) + "°F | " + Math.floor(weatherData.list[6].main.temp_min) + "°F" : Math.floor(weatherData.list[6].main.temp_min) + "°F | " + Math.floor(weatherData.list[8].main.temp_max) + "°F";
     day2MaxandMin.textContent = Math.floor(weatherData.list[15].main.temp_max) > Math.floor(weatherData.list[18].main.temp_min) ? Math.floor(weatherData.list[15].main.temp_max) + "°F | " + Math.floor(weatherData.list[18].main.temp_min) + "°F" : Math.floor(weatherData.list[18].main.temp_min) + "°F | " + Math.floor(weatherData.list[15].main.temp_max) + "°F";
     day3MaxandMin.textContent = Math.floor(weatherData.list[27].main.temp_max) > Math.floor(weatherData.list[22].main.temp_min) ? Math.floor(weatherData.list[27].main.temp_max) + "°F | " + Math.floor(weatherData.list[22].main.temp_min) + "°F" : Math.floor(weatherData.list[22].main.temp_min) + "°F | " + Math.floor(weatherData.list[27].main.temp_max) + "°F";
@@ -228,7 +229,6 @@ searchBtn.addEventListener('click', async function (e) {
 });
 
 
-
 // day / night mode variable to change , add/remove classes
 let dayModeBtn = document.getElementById("dayModeBtn");
 let dayMode = document.getElementById("dayMode");
@@ -246,6 +246,7 @@ let date4Box = document.getElementById("date4Box");
 let date5Box = document.getElementById("date5Box");
 let openFavorites = document.getElementById("openFavorites");
 let darkBG = document.getElementById("darkBG");
+let darkModeBtn = document.getElementById("darkModeBtn");
 
 // click day/sun button and changes to dark mode
 dayModeBtn.addEventListener('click', function (e) {
@@ -283,13 +284,10 @@ dayModeBtn.addEventListener('click', function (e) {
     darkBG.classList.remove('BGImg');
     darkBG.classList.add('grayscale');
     dayMode.remove();
+    darkModeBtn.src = "../assets/moonimage.png";
+    darkModeBtn.classList.remove("d-none");
 
 });
-
-// Create Image and Have it Visible when it's on dark/night mode
-function MoonImage() {
-
-}
 
 // let futureTimes = document.getElementById("futureTimes");
 let active = false;
@@ -502,8 +500,10 @@ favoritesBtn.addEventListener('click', function (e) {
         //remove from local
         let index = favArray.indexOf(cityName.textContent);
         favArray.splice(index, 1);
+        favoritesBtn.src = "../assets/heartoutline.png";
     } else {
         favArray.push(cityName.textContent);
+        favoritesBtn.src = "../assets/heartfilled.png";
     }
     localStorage.setItem("cities", JSON.stringify(favArray));
 });
@@ -515,10 +515,10 @@ openFavorites.addEventListener('click', function (e) {
     if (favArray.length > 0) {
         favArray.forEach(city => {
             let cityComponent = OffCanvasCity(city);
-            cityComponent.addEventListener('click', function (e) {
-                SearchCityApi(city);
-                inject.innerHTML = "";
-            })
+            // cityComponent.addEventListener('click', function (e) {
+            //     SearchCityApi(city);
+            //     inject.innerHTML = "";
+            // })
             inject.appendChild(cityComponent);
         }
         )
@@ -527,3 +527,10 @@ openFavorites.addEventListener('click', function (e) {
 closeOffCanvasBtn.addEventListener("click", function(e){
     inject.innerHTML = "";
 });
+
+export function removeFav(cityName){
+    // indexOf is finding the index position where the value lies in the array
+    let index = favArray.indexOf(cityName);
+    favArray.splice(index, 1);
+    localStorage.setItem("cities", JSON.stringify(favArray));
+}

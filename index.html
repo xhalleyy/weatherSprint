@@ -16,11 +16,11 @@
         <div class="row">
           <div class="col-1"></div>
           <div class="col">
-            <a class="nav-link" href="#"><h1 id="navTitle" class="weatherTitle py-0">climate.xchange</h1></a>
+            <a id="webTitle" class="nav-link" href="#"><h1 id="navTitle" class="weatherTitle py-0">climate.xchange</h1></a>
           </div>
           <div class="col d-flex justify-content-end align-items-center pe-0">
               <input id="userInput" class="form-control box-shadow border-rad me-3" type="text" placeholder="Search for a City" aria-label="Search">
-              <button id="searchBtn" class="btn border-rad search-icon-btn" type="button"><img class="img-fluid" width="28px" height="40px" src="./assets/Search-Button-White-PNG.png" alt=""></button>
+              <button id="searchBtn" class="border-rad search-icon-btn"><img class="img-fluid" width="28px" height="40px" src="./assets/Search-Button-White-PNG.png" alt=""></button>
           </div>
           <div class="col-1 ps-0"></div>
         </div>
@@ -41,12 +41,12 @@
                   <img id="favoritesBtn" src="./assets/heartoutline.png" alt="" width="150%" height="30px">
                 </div>
               </div>
-              <div class="row">
+              <div class="row currentPadding">
                 <div id="weatherIcon" class="col-3 d-flex justify-content-center align-items-center iconFont current-icon-font remove-space"></div>
                 <div id="currentTemp" class="curr-temp-text col d-flex justify-content-end pe-4 remove-space">Temp.</div>
               </div>
               <!-- <div class="horizontal-dotted-line"></div>></div> -->
-              <div class="row pb-4 desc-and-temps">
+              <div class="row pb-4 mb-2 desc-and-temps">
                 <hr>
                 <div id="weatherText" class="col-6 px-4 d-flex align-items-center">Description</div>
                 <div class="col-6">
@@ -60,10 +60,10 @@
             <!-- Current's Date and 3 Hr Forecast -->
             <div id="darkCurrTimes" class="col-5 border-rad whiteBG mt-5 mb-3 ms-2 pt-4 px-4">
               <div class="row">
-                <div class="col todayText mb-2">TODAY</div>
-                <div id="presentTime" class="col d-flex justify-content-end pe-3">Current Time</div>
+                <div class="col todayText">TODAY</div>
+                <div id="presentTime" class="col todayText d-flex justify-content-end pe-3">Current Time</div>
               </div>
-              <div class="row mt-4">
+              <div class="row mt-4 currentPadding">
                 <div class="col-4 text-center vl">
                   <p id="morningTime" class="timeText lightGrayColor">8am</p>
                   <p id="morningIcon" class="iconFont curr-times-font" ></p>
@@ -166,20 +166,13 @@
       </div>
     </div>
 
-    <!-- <div class="container-fluid">
+    <div class="container-fluid">
       <div class="row">
-        <div id=favoritesPage class="col-3 pt-4 favoritesOpacity border-rad sidebar-box">
-          <div class="row">
-            <div class="col">
-              <p>Your Favorite Cities</p>
-            </div>
-            <div class="col d-flex justify-content-end">
-              <span id="closePage" class="material-symbols-outlined sp-icon-open">close</span>
-            </div>
-          </div id="favoriteCity"></div>
+        <div class="col d-flex justify-content-end">
+          <img id="darkModeBtn" class="moonImg d-none">
+        </div>
       </div>
-    </div> -->
-    
+    </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

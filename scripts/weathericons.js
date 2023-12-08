@@ -1,4 +1,6 @@
-export function weatherIconCode(code, time) {
+export { weatherIconCode, colorIcon}
+
+function weatherIconCode(code, time) {
 
     switch (code) {
         case '01d':
@@ -42,7 +44,7 @@ export function weatherIconCode(code, time) {
             return 'a';
     }
 }
-export function colorIcon(icon, night) {
+function colorIcon(icon, night) {
     switch (icon) {
         case '01d':
             return night ? 'clearNight' : 'yellow';

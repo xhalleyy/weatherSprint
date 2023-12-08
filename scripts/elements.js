@@ -1,3 +1,4 @@
+import { SearchCityApi, removeFav } from "./app.js";
 let futureTimes = document.getElementById("futureTimes");
 
 function OtherDatesInfo() {
@@ -101,7 +102,7 @@ function OtherDatesInfo() {
 
     // outer divs of the columns and rows
     let outCol2 = document.createElement("div");
-    outCol2.className = "col bgOpacity border-rad opacity py-4 px-5 mb-4";
+    outCol2.className = "col bgOpacity border-rad opacity py-4 px-5 mb-4 remove-margin";
 
     outCol2.appendChild(outRow);
 
@@ -124,65 +125,77 @@ function OtherDatesInfo() {
     futureTimes.appendChild(container);
 }
 
-export { futureTimes, OtherDatesInfo}
-/* <div id="futureTimes">
-<div class="container">
-  <div class="row">
-    <div class="col-1"></div>
-    <div class="col whiteBG border-rad layout pt-4 px-5" style="opacity: .7;">
-      <div class="row pt-2">
-        <div class="col ">
-          <h id="futureDate1" class="placeLocation">Date</h2>
-          <p id="future1Desc" class="placeLocation"><hr class="dottedLine">Description</p>
-        </div>
-        <div class="col text-center">
-          <div class="row">
-            <div class="col timeText">8am
-              <p id="morning1Icon" class="iconFont curr-times-font" ></p>
-              <h2 id="date1AMTemp" class="timeTempText"></h2>
-            </div>
-            <div class="col timeText">noon
-              <p id="noon1Icon" class="iconFont curr-times-font" ></p>
-              <h2 id="date1Noon" class="timeTempText"></h2>
-            </div>
-            <div class="col timeText">8pm
-              <p id="night1Icon" class="iconFont curr-times-font" ></p>
-              <h2 id="date1PM" class="timeTempText"></h2>
-            </div>
-          </div>
-        </div>
+{/* <div class="offcanvas-body">
+<div id="favoriteCity" class="favoriteBody d-flex align-items-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-10">
+        <p class="ps-4 mt-1">Favorite City</p>
+      </div>
+      <div class="col-2 d-flex align-items-center">
+        <span class="material-symbols-outlined">
+          close
+          </span>
       </div>
     </div>
-    <div class="col-1"></div>
   </div>
 </div>
-</div> */
+</div>  */}
 
-export function OffCanvasCity(cityName){
+function OffCanvasCity(cityName){
+  let span = document.createElement("span");
+  span.className = "material-symbols-outlined";
+  span.textContent = "close";
+  
+  let col1 = document.createElement("div");
+  col1.className = "col-2 d-flex align-items-center";
+  
+ 
+  col1.appendChild(span);
+
   let p = document.createElement("p");
   p.classList.add("ps-4");
-  p.classList.add("mt-1");
+  p.classList.add("mt-2");
+  p.classList.add("elementPadding");
   p.textContent = cityName;
 
+  let col2 = document.createElement("div");
+  col2.className = "col-10";
+  col2.appendChild(p);
+
+  col2.addEventListener('click', function (e) {
+    SearchCityApi(cityName);
+    inject.innerHTML = "";
+  })
+  col2.setAttribute('data-bs-dismiss', 'offcanvas')
+
+  let row = document.createElement("div");
+  row.className = "row my-2";
+  row.appendChild(col2);
+  row.appendChild(col1);
+
+  let container = document.createElement("div");
+  container.className = "container";
+  container.appendChild(row);
+
+  
   let innerDiv = document.createElement("div");
   innerDiv.id = cityName.replaceAll(", ", "_");
   innerDiv.classList.add("favoriteBody");
-  // innerDiv.classList.add("d-flex");
-  // innerDiv.classList.add("align-items-center");
-
-  innerDiv.appendChild(p);
-
+  innerDiv.classList.add("mx-4");
+  
+  innerDiv.appendChild(row);
+  
   let outerDiv = document.createElement("div");
   outerDiv.classList.add("offcanvas-body");
-  outerDiv.setAttribute('data-bs-dismiss', 'offcanvas')
-
+  
   outerDiv.appendChild(innerDiv);
+  col1.addEventListener("click", function(e){
+    // console.log("Hi");
+    removeFav(cityName);
+    outerDiv.remove();
+  })
   return outerDiv;
 }
 
-
-{/* <div class="offcanvas-body">
-        <div id="favoriteCity" class="favoriteBody d-flex align-items-center">
-          <p class="ps-4 mt-1">Favorite City</p>
-        </div>
-      </div> */}
+export { futureTimes, OtherDatesInfo, OffCanvasCity }
