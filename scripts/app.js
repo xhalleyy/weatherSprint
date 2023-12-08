@@ -6,7 +6,7 @@
 import { apiKey } from "./hidekey.js";
 import { formatTime } from "./conversion.js";
 import { weatherIconCode, colorIcon } from "./weathericons.js";
-import { futureTimes, OtherDatesInfo } from "./elements.js";
+import { futureTimes, OtherDatesInfo, OffCanvasCity } from "./elements.js";
 
 // What Information needs to change when we receive the data from the api
 let cityName = document.getElementById("cityName");
@@ -47,6 +47,7 @@ let searchBtn = document.getElementById("searchBtn");
 let currLatitude;
 let currLongitude;
 let weatherData;
+
 
 navigator.geolocation.getCurrentPosition(success, errorFunc);
 
@@ -92,7 +93,7 @@ async function success(position) {
 
     // Since I'm grabbing temps from different indexes, this is making sure that the higher temps at these indexes are displayed the higher temp first and then the lower temp
     day1MaxandMin.textContent = Math.floor(weatherData.list[8].main.temp_max) > Math.floor(weatherData.list[6].main.temp_min) ? Math.floor(weatherData.list[8].main.temp_max) + "°F | " + Math.floor(weatherData.list[6].main.temp_min) + "°F" : Math.floor(weatherData.list[6].main.temp_min) + "°F | " + Math.floor(weatherData.list[8].main.temp_max) + "°F";
-    day2MaxandMin.textContent =  Math.floor(weatherData.list[15].main.temp_max) > Math.floor(weatherData.list[18].main.temp_min) ? Math.floor(weatherData.list[15].main.temp_max) + "°F | " + Math.floor(weatherData.list[18].main.temp_min) + "°F" : Math.floor(weatherData.list[18].main.temp_min) + "°F | " + Math.floor(weatherData.list[15].main.temp_max) + "°F";
+    day2MaxandMin.textContent = Math.floor(weatherData.list[15].main.temp_max) > Math.floor(weatherData.list[18].main.temp_min) ? Math.floor(weatherData.list[15].main.temp_max) + "°F | " + Math.floor(weatherData.list[18].main.temp_min) + "°F" : Math.floor(weatherData.list[18].main.temp_min) + "°F | " + Math.floor(weatherData.list[15].main.temp_max) + "°F";
     day3MaxandMin.textContent = Math.floor(weatherData.list[27].main.temp_max) > Math.floor(weatherData.list[22].main.temp_min) ? Math.floor(weatherData.list[27].main.temp_max) + "°F | " + Math.floor(weatherData.list[22].main.temp_min) + "°F" : Math.floor(weatherData.list[22].main.temp_min) + "°F | " + Math.floor(weatherData.list[27].main.temp_max) + "°F";
     day4MaxandMin.textContent = Math.floor(weatherData.list[32].main.temp_max) > Math.floor(weatherData.list[29].main.temp_min) ? Math.floor(weatherData.list[32].main.temp_max) + "°F | " + Math.floor(weatherData.list[29].main.temp_min) + "°F" : Math.floor(weatherData.list[29].main.temp_min) + "°F | " + Math.floor(weatherData.list[32].main.temp_max) + "°F";
     day5MaxandMin.textContent = Math.floor(weatherData.list[39].main.temp_max) > Math.floor(weatherData.list[36].main.temp_min) ? Math.floor(weatherData.list[39].main.temp_max) + "°F | " + Math.floor(weatherData.list[36].main.temp_min) + "°F" : Math.floor(weatherData.list[36].main.temp_min) + "°F | " + Math.floor(weatherData.list[39].main.temp_max) + "°F";
@@ -106,30 +107,30 @@ async function success(position) {
     todayAMTemp.textContent = `${wholeNumAM}°`;
     todayNoonTemp.textContent = `${wholeNumNoon}°`;
     todayPMTemp.textContent = `${wholeNumPM}°`;
-    
+
     // presentTime.textContent = `${hours}:${minutes}`;
     // day1.textContent = "";
     // let date1 = new Date(weatherData.list[3].dt_txt);
     // let firstdayForecast = date1.getDay();
     // console.log(firstdayForecast);
-    const format = { 
+    const format = {
         weekday: 'short',
         month: 'numeric',
         day: 'numeric'
     };
-    const day1Time = new Date(weatherData.list[8].dt * 1000);
+    const day1Time = new Date(weatherData.list[6].dt * 1000);
     const day1Date = day1Time.toLocaleDateString('en-US', format).split(",");
     day1.textContent = day1Date[0] + day1Date[1];
 
-    const day2Time = new Date(weatherData.list[16].dt * 1000);
+    const day2Time = new Date(weatherData.list[14].dt * 1000);
     const day2Date = day2Time.toLocaleDateString('en-US', format).split(",");
     day2.textContent = day2Date[0] + day2Date[1];
 
-    const day3Time = new Date(weatherData.list[24].dt * 1000);
+    const day3Time = new Date(weatherData.list[22].dt * 1000);
     const day3Date = day3Time.toLocaleDateString('en-US', format).split(",");
     day3.textContent = day3Date[0] + day3Date[1];
 
-    const day4Time = new Date(weatherData.list[32].dt * 1000);
+    const day4Time = new Date(weatherData.list[30].dt * 1000);
     const day4Date = day4Time.toLocaleDateString('en-US', format).split(",");
     day4.textContent = day4Date[0] + day4Date[1];
 
@@ -163,17 +164,17 @@ async function SearchCityApi(city) {
     const promise = await fetch(
         `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=10&appid=${apiKey}`);
     const data = await promise.json();
-    
+
     currLatitude = data[0].lat;
     currLongitude = data[0].lon;
-    
+
     weatherData = await ForecastApi(currLatitude, currLongitude);
     console.log(weatherData);
     const currentCityData = await CurrentApi(currLatitude, currLongitude);
     const currentTime = formatTime(currentCityData.dt, currentCityData.timezone);
     console.log(currentCityData);
     console.log(currentTime);
-    
+
     cityName.textContent = `${data[0].name.toUpperCase()}, ${data[0].state ? data[0].state.toUpperCase() + "," : ""} ${data[0].country.toUpperCase()}`
     currentTemp.textContent = `${Math.floor(currentCityData.main.temp)}°F`;
     maxTemp.textContent = `H:${Math.floor(currentCityData.main.temp_max)}°F`;
@@ -201,9 +202,9 @@ async function SearchCityApi(city) {
 
     // Math.floor(weatherData.list[15].main.temp_max) > Math.floor(weatherData.list[18].main.temp_min) ? Math.floor(weatherData.list[15].main.temp_max) + "°F | " + Math.floor(weatherData.list[18].main.temp_min) + "°F" : Math.floor(weatherData.list[18].main.temp_min) + "°F | " + Math.floor(weatherData.list[15].main.temp_max) + "°F";
     day1MaxandMin.textContent = Math.floor(weatherData.list[8].main.temp_max) > Math.floor(weatherData.list[6].main.temp_min) ? Math.floor(weatherData.list[8].main.temp_max) + "°F | " + Math.floor(weatherData.list[6].main.temp_min) + "°F" : Math.floor(weatherData.list[6].main.temp_min) + "°F | " + Math.floor(weatherData.list[8].main.temp_max) + "°F";
-    day2MaxandMin.textContent =  Math.floor(weatherData.list[15].main.temp_max) > Math.floor(weatherData.list[18].main.temp_min) ? Math.floor(weatherData.list[15].main.temp_max) + "°F | " + Math.floor(weatherData.list[18].main.temp_min) + "°F" : Math.floor(weatherData.list[18].main.temp_min) + "°F | " + Math.floor(weatherData.list[15].main.temp_max) + "°F";
+    day2MaxandMin.textContent = Math.floor(weatherData.list[15].main.temp_max) > Math.floor(weatherData.list[18].main.temp_min) ? Math.floor(weatherData.list[15].main.temp_max) + "°F | " + Math.floor(weatherData.list[18].main.temp_min) + "°F" : Math.floor(weatherData.list[18].main.temp_min) + "°F | " + Math.floor(weatherData.list[15].main.temp_max) + "°F";
     day3MaxandMin.textContent = Math.floor(weatherData.list[27].main.temp_max) > Math.floor(weatherData.list[22].main.temp_min) ? Math.floor(weatherData.list[27].main.temp_max) + "°F | " + Math.floor(weatherData.list[22].main.temp_min) + "°F" : Math.floor(weatherData.list[22].main.temp_min) + "°F | " + Math.floor(weatherData.list[27].main.temp_max) + "°F";
-    day4MaxandMin.textContent =  Math.floor(weatherData.list[32].main.temp_max) > Math.floor(weatherData.list[29].main.temp_min) ? Math.floor(weatherData.list[32].main.temp_max) + "°F | " + Math.floor(weatherData.list[29].main.temp_min) + "°F" : Math.floor(weatherData.list[29].main.temp_min) + "°F | " + Math.floor(weatherData.list[32].main.temp_max) + "°F";
+    day4MaxandMin.textContent = Math.floor(weatherData.list[32].main.temp_max) > Math.floor(weatherData.list[29].main.temp_min) ? Math.floor(weatherData.list[32].main.temp_max) + "°F | " + Math.floor(weatherData.list[29].main.temp_min) + "°F" : Math.floor(weatherData.list[29].main.temp_min) + "°F | " + Math.floor(weatherData.list[32].main.temp_max) + "°F";
     day5MaxandMin.textContent = Math.floor(weatherData.list[39].main.temp_max) > Math.floor(weatherData.list[36].main.temp_min) ? Math.floor(weatherData.list[39].main.temp_max) + "°F | " + Math.floor(weatherData.list[36].main.temp_min) + "°F" : Math.floor(weatherData.list[36].main.temp_min) + "°F | " + Math.floor(weatherData.list[39].main.temp_max) + "°F";
 
 
@@ -214,9 +215,16 @@ async function SearchCityApi(city) {
 
 }
 
+let modal = new bootstrap.Modal(document.getElementById("modal"));
 searchBtn.addEventListener('click', async function (e) {
     // console.log(userInput.value);
-    await SearchCityApi(userInput.value);
+    try{
+        
+        await SearchCityApi(userInput.value);
+    } catch (error) {
+        modal.show()
+    }
+    // if()
 });
 
 
@@ -296,7 +304,7 @@ date1Box.addEventListener('click', function (e) {
     date1Box.classList.add("bgOpacity");
     active = !active;
     inactive = false;
-    OtherDatesInfo();   
+    OtherDatesInfo();
     let futureDate1 = document.getElementById("futureDate1");
     let future1Desc = document.getElementById("future1Desc");
     let morning1Icon = document.getElementById("morning1Icon");
@@ -307,9 +315,10 @@ date1Box.addEventListener('click', function (e) {
     let date1PM = document.getElementById("date1PM");
     let container = document.getElementById("remove");
 
-    const day1Time = new Date(weatherData.list[6].dt * 1000);
+    const day1Time = new Date(weatherData.list[4].dt * 1000);
     const dayofWeek = daysOfWeek[day1Time.getUTCDay()];
-    
+    console.log(dayofWeek);
+
     futureDate1.textContent = dayofWeek.toUpperCase();
     future1Desc.textContent = weatherData.list[6].weather[0].description;
     morning1Icon.textContent = weatherIconCode(weatherData.list[6].weather[0].icon);
@@ -324,8 +333,7 @@ date1Box.addEventListener('click', function (e) {
     date1PM.textContent = Math.floor(weatherData.list[8].main.temp) + "°";
 
 
-    if(!active)
-    {
+    if (!active) {
         container.remove();
         date1Box.classList.remove("bgOpacity");
     }
@@ -349,9 +357,9 @@ date2Box.addEventListener('click', function (e) {
     let date1PM = document.getElementById("date1PM");
     let container = document.getElementById("remove");
 
-    const day1Time = new Date(weatherData.list[13].dt * 1000);
+    const day1Time = new Date(weatherData.list[11].dt * 1000);
     const dayofWeek = daysOfWeek[day1Time.getUTCDay()];
-    
+
     futureDate1.textContent = dayofWeek.toUpperCase();
     future1Desc.textContent = weatherData.list[13].weather[0].description;
     morning1Icon.textContent = weatherIconCode(weatherData.list[13].weather[0].icon);
@@ -365,8 +373,7 @@ date2Box.addEventListener('click', function (e) {
     date1Noon.textContent = Math.floor(weatherData.list[14].main.temp) + "°";
     date1PM.textContent = Math.floor(weatherData.list[15].main.temp) + "°";
 
-    if(!inactive)
-    {
+    if (!inactive) {
         container.remove();
         date2Box.classList.remove("bgOpacity");
     }
@@ -387,9 +394,9 @@ date3Box.addEventListener('click', function (e) {
     let date1PM = document.getElementById("date1PM");
     let container = document.getElementById("remove");
 
-    const day1Time = new Date(weatherData.list[20].dt * 1000);
+    const day1Time = new Date(weatherData.list[18].dt * 1000);
     const dayofWeek = daysOfWeek[day1Time.getUTCDay()];
-    
+
     futureDate1.textContent = dayofWeek.toUpperCase();
     future1Desc.textContent = weatherData.list[20].weather[0].description;
     morning1Icon.textContent = weatherIconCode(weatherData.list[20].weather[0].icon);
@@ -403,8 +410,7 @@ date3Box.addEventListener('click', function (e) {
     date1Noon.textContent = Math.floor(weatherData.list[21].main.temp) + "°";
     date1PM.textContent = Math.floor(weatherData.list[22].main.temp) + "°";
 
-    if(!inactive)
-    {
+    if (!inactive) {
         container.remove();
         date3Box.classList.remove("bgOpacity");
     }
@@ -425,9 +431,9 @@ date4Box.addEventListener('click', function (e) {
     let date1PM = document.getElementById("date1PM");
     let container = document.getElementById("remove");
 
-    const day1Time = new Date(weatherData.list[26].dt * 1000);
+    const day1Time = new Date(weatherData.list[24].dt * 1000);
     const dayofWeek = daysOfWeek[day1Time.getUTCDay()];
-    
+
     futureDate1.textContent = dayofWeek.toUpperCase();
     future1Desc.textContent = weatherData.list[26].weather[0].description;
     morning1Icon.textContent = weatherIconCode(weatherData.list[26].weather[0].icon);
@@ -441,8 +447,7 @@ date4Box.addEventListener('click', function (e) {
     date1Noon.textContent = Math.floor(weatherData.list[27].main.temp) + "°";
     date1PM.textContent = Math.floor(weatherData.list[28].main.temp) + "°";
 
-    if(!inactive)
-    {
+    if (!inactive) {
         container.remove();
         date4Box.classList.remove("bgOpacity");
     }
@@ -465,7 +470,7 @@ date5Box.addEventListener('click', function (e) {
 
     const day1Time = new Date(weatherData.list[33].dt * 1000);
     const dayofWeek = daysOfWeek[day1Time.getUTCDay()];
-    
+
     futureDate1.textContent = dayofWeek.toUpperCase();
     future1Desc.textContent = weatherData.list[33].weather[0].description;
     morning1Icon.textContent = weatherIconCode(weatherData.list[33].weather[0].icon);
@@ -479,26 +484,46 @@ date5Box.addEventListener('click', function (e) {
     date1Noon.textContent = Math.floor(weatherData.list[34].main.temp) + "°";
     date1PM.textContent = Math.floor(weatherData.list[35].main.temp) + "°";
 
-    if(!inactive)
-    {
+    if (!inactive) {
         container.remove();
         date5Box.classList.remove("bgOpacity");
     }
 });
 
-let cityArr = [];
+// let cityArr = [];
 let favoritesBtn = document.getElementById("favoritesBtn");
-let favoritesPage = document.getElementById("favoritesPage");
-let favoriteCity = document.getElementById("favorityCity");
+let favArray = []
+if (localStorage.getItem("cities")) {
+    favArray = JSON.parse(localStorage.getItem("cities"));
+}
 
-favoritesBtn.addEventListener('click', function(e){
-    cityArr.push(cityName.textContent);
-    localStorage.setItem("cities", JSON.stringify(cityArr));
-});
-
-openFavorites.addEventListener('click', function(e){
-    
-    if(localStorage.getItem("cities")) {
-        cityArr = JSON.parse(localStorage.getItems("cities"));
+favoritesBtn.addEventListener('click', function (e) {
+    if (favArray.includes(cityName.textContent)) {
+        //remove from local
+        let index = favArray.indexOf(cityName.textContent);
+        favArray.splice(index, 1);
+    } else {
+        favArray.push(cityName.textContent);
     }
+    localStorage.setItem("cities", JSON.stringify(favArray));
+});
+let inject = document.getElementById('inject');
+let closeOffCanvasBtn = document.getElementById('closeOffCanvasBtn');
+openFavorites.addEventListener('click', function (e) {
+    inject.innerHTML = "";
+
+    if (favArray.length > 0) {
+        favArray.forEach(city => {
+            let cityComponent = OffCanvasCity(city);
+            cityComponent.addEventListener('click', function (e) {
+                SearchCityApi(city);
+                inject.innerHTML = "";
+            })
+            inject.appendChild(cityComponent);
+        }
+        )
+    }
+});
+closeOffCanvasBtn.addEventListener("click", function(e){
+    inject.innerHTML = "";
 });

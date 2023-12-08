@@ -122,9 +122,9 @@
         <div id="futureTimes"></div>
     
         <div class="container d-flex justify-content-center">
-          <a id="openFavorites" class="whiteBG favorites-style side-panel-toggle" href="">
-            <p class="my-0 text-center d-flex align-items-center"><span class="heart-text sp-icon-open">❤</span> Open Your Favorite Places</p>
-          </a>
+          <button id="openFavorites" class="whiteBG favorites-style" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
+            <span class="heart-text sp-icon-open">❤</span> Open Your Favorite Places
+        </button>
         </div>
         
         <div id="dayMode" class="container-fluid">
@@ -136,7 +136,37 @@
 
     <!-- This is just to show how the favorites will look -->
 
-    <div class="container-fluid">
+    <div class="offcanvas offcanvas-start favoritesOpacity" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title favoriteTitle" id="offcanvasLabel">YOUR FAVORITE CITIES</h5>
+        <button id="closeOffCanvasBtn" type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div id="inject"></div>
+      </div>
+    </div>
+
+    <div id="modal" class="modal" tabindex="-1">
+      <div class="modal-dialog modal-lg centerModal">
+        <div class="modal-content border-rad">
+          <div class="modal-body text-center">
+            <span class="material-symbols-outlined locationIcon">
+              location_off
+              </span>
+            <p class="wrongLocationTitle">whoops.</p>
+            <p class="wrongLocation">The city you tried searching for cannot be found.
+              <br>Please try another location.
+              <!-- <br> To grab a specific city, you can use the format:
+              <br>[city name], [country code] OR [city], [state code], [country code] -->
+            </p>
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <button type="button" class="btn tryAgainBtn" data-bs-dismiss="modal">Try another search ></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="container-fluid">
       <div class="row">
         <div id=favoritesPage class="col-3 pt-4 favoritesOpacity border-rad sidebar-box">
           <div class="row">
@@ -148,10 +178,8 @@
             </div>
           </div id="favoriteCity"></div>
       </div>
-    </div>
+    </div> -->
     
-    <!-- <div class="modal-dialog modal-lg">...</div> -->
-
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

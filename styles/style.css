@@ -175,7 +175,7 @@
 
 .favorites-style {
     border-radius: 15px;
-    opacity: .8;
+    opacity: .9;
     padding-top: 10px;
     padding-bottom: 10px;
     font-family: roboto-reg;
@@ -184,6 +184,7 @@
     color: #707070;
     padding-left: 130px;
     padding-right: 130px;
+    border: none;
 }
 
 .iconFont {
@@ -284,9 +285,78 @@ rgb(141, 171, 216); middle
 }
 
 .favoritesOpacity {
-    background: rgba(255, 255, 255, 0.85)
+    background: rgba(255, 255, 255, 0.85) !important;
 }
 
-.side-panel-toggle {
+.favoriteTitle {
+    font-family: roboto-light;
+    font-weight: 400;
+    font-size: 22px;
+}
 
+.btn-close {
+    border: 2px solid black;
+    border-radius: 20px;
+}
+
+
+.favoriteBody {
+    font-family: roboto-reg;
+    font-size: 20px;
+    margin-top: 5px;
+    padding-top: 10px;
+    background-color: white;
+    border-radius: 15px;
+
+}
+
+.offcanvas-body {
+    flex-grow: 0;
+    padding: 0;
+}
+
+#inject {
+    overflow-y: auto;
+}
+
+.centerModal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+}
+
+.locationIcon {
+    font-size: 120px !important;
+    color: #BDB8F8;
+    margin-top: 60px;
+}
+
+.wrongLocationTitle {
+    font-family: philosopher-bold;
+    font-size: 50px;
+    color: #5C5C5C;
+}
+
+.wrongLocation {
+    font-family: roboto-reg;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.tryAgainBtn {
+    font-family: roboto-reg;
+    font-size: 20px;
+    margin-bottom: 60px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #BDB8F8;
+    color: black;
+    border-radius: 15px;
+}
+
+.modal-footer {
+    border-top: none;
 }

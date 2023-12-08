@@ -157,3 +157,32 @@ export { futureTimes, OtherDatesInfo}
   </div>
 </div>
 </div> */
+
+export function OffCanvasCity(cityName){
+  let p = document.createElement("p");
+  p.classList.add("ps-4");
+  p.classList.add("mt-1");
+  p.textContent = cityName;
+
+  let innerDiv = document.createElement("div");
+  innerDiv.id = cityName.replaceAll(", ", "_");
+  innerDiv.classList.add("favoriteBody");
+  // innerDiv.classList.add("d-flex");
+  // innerDiv.classList.add("align-items-center");
+
+  innerDiv.appendChild(p);
+
+  let outerDiv = document.createElement("div");
+  outerDiv.classList.add("offcanvas-body");
+  outerDiv.setAttribute('data-bs-dismiss', 'offcanvas')
+
+  outerDiv.appendChild(innerDiv);
+  return outerDiv;
+}
+
+
+{/* <div class="offcanvas-body">
+        <div id="favoriteCity" class="favoriteBody d-flex align-items-center">
+          <p class="ps-4 mt-1">Favorite City</p>
+        </div>
+      </div> */}
