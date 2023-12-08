@@ -18,6 +18,7 @@ function OtherDatesInfo(nightMode) {
     h2.id = "date1AMTemp";
 
     let morningDiv = document.createElement("div");
+    morningDiv.id = "morningForecast";
     morningDiv.classList.add("col");
     morningDiv.classList.add("timeText");
 
@@ -37,6 +38,7 @@ function OtherDatesInfo(nightMode) {
     noonH2.id = "date1Noon";
 
     let noonDiv = document.createElement("div");
+    noonDiv.id = "noonForecast";
     noonDiv.classList.add("col");
     noonDiv.classList.add("timeText");
 
@@ -56,6 +58,7 @@ function OtherDatesInfo(nightMode) {
     nightH2.id = "date1PM";
 
     let nightDiv = document.createElement("div");
+    nightDiv.id = "nightForecast";
     nightDiv.classList.add("col");
     nightDiv.classList.add("timeText");
 
@@ -72,6 +75,7 @@ function OtherDatesInfo(nightMode) {
     innerRow.appendChild(nightDiv);
 
     let innerCol = document.createElement("div");
+
     innerCol.classList.add("col");
     innerCol.classList.add("text-center");
 
@@ -106,7 +110,10 @@ function OtherDatesInfo(nightMode) {
     let outCol2 = document.createElement("div");
     outCol2.id = "selectedDark";
     if(nightMode){
-      outCol2.className = "col selectedDarkBG border-rad opacity py-4 px-5 mb-4 remove-margin";
+      outCol2.className = "col selectedDarkBG border-rad white-font opacity py-4 px-5 mb-4 remove-margin";
+      noonDiv.classList.add('darkTimeText');
+      morningDiv.classList.add('darkTimeText');
+      nightDiv.classList.add('darkTimeText');
     }else{
       outCol2.className = "col bgOpacity border-rad opacity py-4 px-5 mb-4 remove-margin";
     }
@@ -138,24 +145,8 @@ function OtherDatesInfo(nightMode) {
     futureTimes.appendChild(container);
 }
 
-{/* <div class="offcanvas-body">
-<div id="favoriteCity" class="favoriteBody d-flex align-items-center">
-  <div class="container">
-    <div class="row">
-      <div class="col-10">
-        <p class="ps-4 mt-1">Favorite City</p>
-      </div>
-      <div class="col-2 d-flex align-items-center">
-        <span class="material-symbols-outlined">
-          close
-          </span>
-      </div>
-    </div>
-  </div>
-</div>
-</div>  */}
 
-function OffCanvasCity(cityName){
+function OffCanvasCity(cityName, nightMode){
   let span = document.createElement("span");
   span.className = "material-symbols-outlined";
   span.textContent = "remove";
@@ -171,6 +162,7 @@ function OffCanvasCity(cityName){
   p.classList.add("mt-2");
   p.classList.add("elementPadding");
   p.textContent = cityName;
+
 
   let col2 = document.createElement("div");
   col2.className = "col-10";
@@ -211,6 +203,9 @@ function OffCanvasCity(cityName){
     outerDiv.remove();
   })
   return outerDiv;
+
+
+  
 }
 
 export { futureTimes, OtherDatesInfo, OffCanvasCity }

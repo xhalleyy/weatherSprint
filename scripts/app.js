@@ -120,23 +120,23 @@ async function success(position) {
         month: 'numeric',
         day: 'numeric'
     };
-    const day1Time = new Date(weatherData.list[6].dt * 1000);
+    const day1Time = new Date(weatherData.list[7].dt * 1000);
     const day1Date = day1Time.toLocaleDateString('en-US', format).split(",");
     day1.textContent = day1Date[0] + day1Date[1];
 
-    const day2Time = new Date(weatherData.list[14].dt * 1000);
+    const day2Time = new Date(weatherData.list[11].dt * 1000);
     const day2Date = day2Time.toLocaleDateString('en-US', format).split(",");
     day2.textContent = day2Date[0] + day2Date[1];
 
-    const day3Time = new Date(weatherData.list[22].dt * 1000);
+    const day3Time = new Date(weatherData.list[19].dt * 1000);
     const day3Date = day3Time.toLocaleDateString('en-US', format).split(",");
     day3.textContent = day3Date[0] + day3Date[1];
 
-    const day4Time = new Date(weatherData.list[30].dt * 1000);
+    const day4Time = new Date(weatherData.list[27].dt * 1000);
     const day4Date = day4Time.toLocaleDateString('en-US', format).split(",");
     day4.textContent = day4Date[0] + day4Date[1];
 
-    const day5Time = new Date(weatherData.list[39].dt * 1000);
+    const day5Time = new Date(weatherData.list[35].dt * 1000);
     const day5Date = day5Time.toLocaleDateString('en-US', format).split(",");
     day5.textContent = day5Date[0] + day5Date[1];
 
@@ -250,6 +250,7 @@ let date5Box = document.getElementById("date5Box");
 let openFavorites = document.getElementById("openFavorites");
 let darkBG = document.getElementById("darkBG");
 let offcanvas = document.getElementById("offcanvas");
+let offcanvasLabel = document.getElementById("offcanvasLabel");
 
 
 // click day/sun button and changes to dark mode
@@ -295,15 +296,27 @@ dayModeBtn.addEventListener('click', function (e) {
         darkModeBtn.classList.remove('d-none');
         offcanvas.classList.add('selectedDarkBG');
         offcanvas.classList.remove('favoritesOpacity');
-        offcanvas.classList.add('white-font');
+        offcanvasLabel.classList.add('white-font');
         closeOffCanvasBtn.classList.add('btn-close-white');
-        // let selectedDark = document.getElementById('selectedDark');
-        // console.log(selectedDark);
 
+        
         if(darkMode ){
             let selectedDark = document.getElementById("selectedDark");
+            let morningForecast = document.getElementById("morningForecast");
+            let noonForecast = document.getElementById("noonForecast");
+            let nightForecast = document.getElementById("nightForecast");
+            let darkCityRow = document.getElementById("darkCityRow");
+            let minusIcon = document.getElementById("minusIcon");
+            let cityTextDM = document.getElementById("cityTextDM");
+
+
             if(selectedDark){
-                selectedDark.className = "col selectedDarkBG border-rad opacity py-4 px-5 mb-4 remove-margin";
+                // diffTimeForecast.classList.add('white-font');
+                selectedDark.className = "col selectedDarkBG white-font border-rad opacity py-4 px-5 mb-4 remove-margin";
+                // date1AMTemp.classList.add('white-font');
+                morningForecast.classList.add('darkTimeText');
+                noonForecast.classList.add('darkTimeText');
+                nightForecast.classList.add('darkTimeText');
             }
         }
         // console.log(selectedDark);
@@ -354,14 +367,25 @@ darkModeBtn.addEventListener('click', function(e){
         dayModeBtn.classList.add('croppedSun');
         // offcanvas.classList.remove('selectedDarkBG');
         offcanvas.classList.add('favoritesOpacity');
-        offcanvas.classList.remove('white-font');
+        offcanvasLabel.classList.remove('white-font');
         closeOffCanvasBtn.classList.remove('btn-close-white');
            
         if(!darkMode){
             let selectedDark = document.getElementById("selectedDark");
+            let morningForecast = document.getElementById("morningForecast");
+            let noonForecast = document.getElementById("noonForecast");
+            let nightForecast = document.getElementById("nightForecast");
+            let darkCityRow = document.getElementById("darkCityRow");
+            if(darkCityRow){
+                selectedDark.classList.add('black');
+            }
             if(selectedDark)
             {
-                selectedDark.className = "col bgOpacity border-rad opacity py-4 px-5 mb-4 remove-margin";
+                // diffTimeForecast.classList.add('white-font');
+                selectedDark.className = "col bgOpacity white-font border-rad opacity py-4 px-5 mb-4 remove-margin";
+                morningForecast.classList.remove('darkTimeText');
+                noonForecast.classList.add('darkTimeText');
+                nightForecast.classList.add('darkTimeText');
             }
         }
 });
@@ -390,7 +414,7 @@ date1Box.addEventListener('click', function (e) {
     let date1PM = document.getElementById("date1PM");
     let container = document.getElementById("remove");
 
-    const day1Time = new Date(weatherData.list[4].dt * 1000);
+    const day1Time = new Date(weatherData.list[7].dt * 1000);
     const dayofWeek = daysOfWeek[day1Time.getUTCDay()];
     console.log(dayofWeek);
 
@@ -432,7 +456,7 @@ date2Box.addEventListener('click', function (e) {
     let date1PM = document.getElementById("date1PM");
     let container = document.getElementById("remove");
 
-    const day1Time = new Date(weatherData.list[11].dt * 1000);
+    const day1Time = new Date(weatherData.list[15].dt * 1000);
     const dayofWeek = daysOfWeek[day1Time.getUTCDay()];
 
     futureDate1.textContent = dayofWeek.toUpperCase();
@@ -469,7 +493,7 @@ date3Box.addEventListener('click', function (e) {
     let date1PM = document.getElementById("date1PM");
     let container = document.getElementById("remove");
 
-    const day1Time = new Date(weatherData.list[18].dt * 1000);
+    const day1Time = new Date(weatherData.list[19].dt * 1000);
     const dayofWeek = daysOfWeek[day1Time.getUTCDay()];
 
     futureDate1.textContent = dayofWeek.toUpperCase();
@@ -506,7 +530,7 @@ date4Box.addEventListener('click', function (e) {
     let date1PM = document.getElementById("date1PM");
     let container = document.getElementById("remove");
 
-    const day1Time = new Date(weatherData.list[24].dt * 1000);
+    const day1Time = new Date(weatherData.list[26].dt * 1000);
     const dayofWeek = daysOfWeek[day1Time.getUTCDay()];
 
     futureDate1.textContent = dayofWeek.toUpperCase();
@@ -543,7 +567,7 @@ date5Box.addEventListener('click', function (e) {
     let date1PM = document.getElementById("date1PM");
     let container = document.getElementById("remove");
 
-    const day1Time = new Date(weatherData.list[33].dt * 1000);
+    const day1Time = new Date(weatherData.list[35].dt * 1000);
     const dayofWeek = daysOfWeek[day1Time.getUTCDay()];
 
     futureDate1.textContent = dayofWeek.toUpperCase();

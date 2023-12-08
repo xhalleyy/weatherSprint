@@ -84,25 +84,11 @@
 }
 
 .BGImg {
-    /* background-image: url(../assets/gradient.png); */
-    /* background-repeat: no-repeat; */
-    /* background-size: 1920px 1080px; */
+
     background: 
-        /* linear-gradient(217deg, rgba(71, 90, 238, 1), rgba(255, 0, 0, 0) 70.71%),
-        linear-gradient(127deg, rgba(143, 220, 249, .8), rgba(0, 255, 0, 0) 70.71%),
-        linear-gradient(336deg, rgba(208, 174, 239, .8), rgba(0, 0, 255, 0) 70.71%); */
         linear-gradient(to top left, rgba(205, 164, 231, 1), rgba(255, 153, 150, 0), rgba(145, 220, 250, 1)), linear-gradient(to top right, rgba(217, 183, 242, 1), rgba(255, 153, 150, 0), rgba(74, 93, 240, 1)) rgb(141, 171, 216);
     background-attachment: fixed;
 }
-
-/* .BGImg::after {
-    content: "";
-    position: absolute;
-    width: inherit;
-    height: inherit;
-    background: linear-gradient(to bottom, rgb(141, 171, 216), white);
-    -webkit-mask-image: linear-gradient(to left, white, transparent);
-} */
 
 .whiteBG {
     background-color: white;
@@ -131,6 +117,12 @@
     color: #6D6D6D;
 }
 
+.darkTimeText {
+    font-family: roboto-thin;
+    font-size: 25px;
+    color: white;
+}
+
 .timeTempText {
     font-family: philosopher-reg;
     font-size: 70px;
@@ -155,16 +147,6 @@
     overflow: hidden;
 }
 
-/* .sunImage {
-    background-image: url(../assets/Yellow-Circle-PNG-Free-Image.png);
-    background-repeat: no-repeat;
-    height: 600px;
-    width: 600px;
-    position: absolute;
-    background-position: 50% 100%;
-    z-index: -1;
-} */
-
 .croppedSun {
     width: 50%;
     height: 78%;
@@ -178,8 +160,8 @@
     width: 48%;
     height: 70%;
     position: absolute;
-    top: 322px;
-    left: 997px;
+    top: 324px;
+    left: 998px;
     z-index: -1;
 }
 
@@ -382,4 +364,8 @@
 
 .remove-margin {
     margin-right: -30px;
+}
+
+.black {
+    color: black !important;
 }
