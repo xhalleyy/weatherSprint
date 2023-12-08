@@ -3,6 +3,8 @@
 Halley Pham
 Weather Sprint
 
+Peer Reviewer & Feedback: 
+
 12/4 EOD: 
 - added some basic styling/structure, such as background image, using HTML and CSS
 - able to grab current position, longitude and latitude
