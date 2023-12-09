@@ -3,6 +3,9 @@
 Halley Pham
 Weather Sprint
 12/8/2023
+
+Description: Browser is viewable for 1920x1080, or else the background/ images will not be filled to view height
+
 Peer Review by: Bria Harrold
 Peer Review: Flawless!! I love love the light and dark mode feature! You really did a good job I can tell you worked very hard to get everything working. Great job!
 
