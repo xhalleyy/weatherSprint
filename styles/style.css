@@ -301,6 +301,7 @@
     margin-top: 5px;
     background-color: white;
     border-radius: 15px;
+    cursor: pointer;
 }
 
 .elementPadding {

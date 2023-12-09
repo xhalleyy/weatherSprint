@@ -2,6 +2,9 @@
 
 Halley Pham
 Weather Sprint
+12/8/2023
+Peer Review by: Bria Harrold
+Peer Review: Flawless!! I love love the light and dark mode feature! You really did a good job I can tell you worked very hard to get everything working. Great job!
 
 12/4 EOD: 
 - added some basic styling/structure, such as background image, using HTML and CSS
@@ -30,3 +33,4 @@ Weather Sprint
     - create elements for favorite’s page and modal for invalid input
     - finish dark mode
     - make sure icons matches the correct times (i.e. 8am shows a sun not a moon)
+

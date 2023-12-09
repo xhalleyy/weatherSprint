@@ -251,6 +251,9 @@ let openFavorites = document.getElementById("openFavorites");
 let darkBG = document.getElementById("darkBG");
 let offcanvas = document.getElementById("offcanvas");
 let offcanvasLabel = document.getElementById("offcanvasLabel");
+let modalStyle = document.getElementById("modalStyle");
+let whoops = document.getElementById("whoops");
+let tryAgain = document.getElementById("tryAgain");
 
 
 // click day/sun button and changes to dark mode
@@ -298,6 +301,9 @@ dayModeBtn.addEventListener('click', function (e) {
         offcanvas.classList.remove('favoritesOpacity');
         offcanvasLabel.classList.add('white-font');
         closeOffCanvasBtn.classList.add('btn-close-white');
+        modalStyle.classList.add('darkModeColor');
+        whoops.classList.add('white-font');
+        tryAgain.classList.add('white-font');
 
         
         if(darkMode ){
@@ -369,6 +375,9 @@ darkModeBtn.addEventListener('click', function(e){
         offcanvas.classList.add('favoritesOpacity');
         offcanvasLabel.classList.remove('white-font');
         closeOffCanvasBtn.classList.remove('btn-close-white');
+        modalStyle.classList.remove('darkModeColor');
+        whoops.classList.remove('white-font');
+        tryAgain.classList.remove('white-font');
            
         if(!darkMode){
             let selectedDark = document.getElementById("selectedDark");
