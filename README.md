@@ -6,8 +6,6 @@ Weather Sprint
 Peer Review by: Bria Harrold
 Peer Review: Flawless!! I love love the light and dark mode feature! You really did a good job I can tell you worked very hard to get everything working. Great job!
 
-Peer Reviewer & Feedback: 
-
 12/4 EOD: 
 - added some basic styling/structure, such as background image, using HTML and CSS
 - able to grab current position, longitude and latitude
